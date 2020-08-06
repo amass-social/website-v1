@@ -1,0 +1,18 @@
+/*
+  Color schemes:
+    - https://www.colorbox.io/#steps=5#hue_start=230#hue_end=275#hue_curve=easeInQuad#sat_start=48#sat_end=32#sat_curve=easeOutQuad#sat_rate=130#lum_start=100#lum_end=61#lum_curve=easeOutQuad#minor_steps_map=0
+*/
+
+
+:root {
+  /* Background colors */
+  --color-bg-1: white;
+  --color-bg-2: #f9f9f9;
+  --color-bg-3: #eeeeee;
+
+  /* Text colors */
+  --color-text-1: white;
+
+  /* Gradients */
+  --gradient-1: linear-gradient(141deg, #526FFF 0%, #767BF0 51%, #8377DE 75%);
+}

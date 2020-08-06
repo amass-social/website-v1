@@ -1,15 +1,37 @@
-#App {
-  text-align: center;
-}
+/* Fonts -------------------------------------------------------------------- */
+/*
+  Fonts are loaded in src/index.css and are loaded from src/Fonts/Fira_Sans_Condensed
+*/
 
 h1 {
   font-family: 'FiraSansCondensed-Boldest';
+  margin: 0px;
 }
 
 h2, h3, h4 {
-  font-family: 'FiraSansCondensed-Bold';
+  font-family: 'FiraSansCondensed-SemiBold';
+  margin: 0px;
 }
 
 p {
   font-family: 'FiraSansCondensed-Regular';
+  margin: 0px;
+}
+
+
+/* App ---------------------------------------------------------------------- */
+
+#App {
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--color-bg-2);
+}
+
+
+#portrait {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  display: flex;
 }
