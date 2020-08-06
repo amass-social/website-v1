@@ -13,8 +13,8 @@ import './App.css';
 import './colors.css';
 
 // Components
-import PortraitNavbar from './Components/Navbar/PortraitNavbar.js';
-
+import PortraitLayout  from './Components/PortraitLayout.js';
+import LandscapeLayout from './Components/LandscapeLayout.js';
 
 // =============================================================================
 // <App/>
@@ -55,19 +55,20 @@ class App extends React.Component {
       return (
         <div id="App">
           <div id="landscape">
-            <h1>amass!</h1>
-            <p>Component: App</p>
-            <p>landscape</p>
+            <LandscapeLayout
+              selectedPage = {this.state.selectedPage}
+              selectPage   = {(newPage) => this.setState({'selectedPage': newPage})}
+              />
           </div>
         </div>
       );
-    } else if (this.state.window.width > 1000) {
+    } else if (this.state.window.width >= 900) {
       return (
         <div id="App">
           <div id="portrait">
-            <PortraitNavbar
-              selectedPage={this.state.selectedPage}
-              selectPage={(newPage) => this.setState({'selectedPage': newPage})}
+            <PortraitLayout
+              selectedPage = {this.state.selectedPage}
+              selectPage   = {(newPage) => this.setState({'selectedPage': newPage})}
             />
           </div>
         </div>

@@ -15,4 +15,5 @@
 
   /* Gradients */
   --gradient-1: linear-gradient(141deg, #526FFF 0%, #767BF0 51%, #8377DE 75%);
+  --color-gradient-1: #526FFF;
 }
