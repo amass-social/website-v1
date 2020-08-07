@@ -15,6 +15,8 @@ import './colors.css';
 // Components
 import PortraitLayout  from './Components/PortraitLayout.js';
 import LandscapeLayout from './Components/LandscapeLayout.js';
+import MobileLayout    from './Components/MobileLayout.js';
+
 
 // =============================================================================
 // <App/>
@@ -77,9 +79,10 @@ class App extends React.Component {
       return (
         <div id="App">
           <div id="mobile">
-            <h1>amass!</h1>
-            <p>Component: App</p>
-            <p>mobile</p>
+            <MobileLayout
+              selectedPage = {this.state.selectedPage}
+              selectPage   = {(newPage) => this.setState({'selectedPage': newPage})}
+              />
           </div>
         </div>
       );

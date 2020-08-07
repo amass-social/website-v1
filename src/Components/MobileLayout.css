@@ -1,0 +1,13 @@
+#MobileLayout {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-3);
+}
+
+
+#MobileLayout #main-content-container {
+  width: 100%;
+  flex-grow: 1;
+}

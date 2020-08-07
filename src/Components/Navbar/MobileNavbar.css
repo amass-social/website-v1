@@ -1,0 +1,36 @@
+
+#MobileNavbar {
+  height: 50px;
+  width: 100%;
+  border-bottom: 1px solid var(--color-bg-4);
+  background-color: var(--color-bg-1);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+#MobileNavbar .icon {
+  font-size: 2em;
+  width: 30px;
+}
+
+#MobileNavbar .icon:hover {
+  cursor: pointer;
+}
+
+#MobileNavbar #new-post-button {
+  font-size: 2em;
+  text-align: center;
+  color: var(--color-gradient-1);
+  height: 38px;
+  width: 38px;
+  border-radius: 20px;
+  border: 2px solid var(--color-gradient-1);
+}
+
+#MobileNavbar #new-post-button:hover {
+  color: white;
+  background-image: var(--gradient-1);
+  cursor: pointer;
+}
