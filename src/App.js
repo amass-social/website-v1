@@ -13,9 +13,8 @@ import './App.css';
 import './colors.css';
 
 // Components
-import PortraitLayout  from './Components/PortraitLayout.js';
-import LandscapeLayout from './Components/LandscapeLayout.js';
-import MobileLayout    from './Components/MobileLayout.js';
+import DesktopLayout from './Components/DesktopLayout.js';
+import MobileLayout  from './Components/MobileLayout.js';
 
 
 // =============================================================================
@@ -53,29 +52,8 @@ class App extends React.Component {
 
   // Renders <App/> in landscape, portrait, and mobile formats
   render() {
-    if (this.state.window.width > this.state.window.height) {
-      return (
-        <div id="App">
-          <div id="landscape">
-            <LandscapeLayout
-              selectedPage = {this.state.selectedPage}
-              selectPage   = {(newPage) => this.setState({'selectedPage': newPage})}
-              />
-          </div>
-        </div>
-      );
-    } else if (this.state.window.width >= 900) {
-      return (
-        <div id="App">
-          <div id="portrait">
-            <PortraitLayout
-              selectedPage = {this.state.selectedPage}
-              selectPage   = {(newPage) => this.setState({'selectedPage': newPage})}
-            />
-          </div>
-        </div>
-      );
-    } else {
+
+    if (this.state.window.width < 900) {
       return (
         <div id="App">
           <div id="mobile">
@@ -87,6 +65,17 @@ class App extends React.Component {
         </div>
       );
     }
+
+
+    return (
+      <div id="App">
+        <DesktopLayout
+          renderLandscape = {(this.state.window.width > this.state.window.height)}
+          selectedPage    = {this.state.selectedPage}
+          selectPage      = {(newPage) => this.setState({'selectedPage': newPage})}
+          />
+      </div>
+    );
   }
 }
 

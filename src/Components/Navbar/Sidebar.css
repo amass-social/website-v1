@@ -1,6 +1,7 @@
 #Sidebar {
-  width: 100%;
+  width: calc(100% - 1px);
   height: 100%;
+  border-right: 1px solid var(--color-bg-4);
   margin-right: 10px;
   display: flex;
   flex-direction: column;
@@ -30,6 +31,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   border-radius: 2px;
+  border: 1px solid var(--color-bg-4);
 }
 
 #Sidebar #top-container #nav-container .tab {
