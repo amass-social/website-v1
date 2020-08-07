@@ -25,7 +25,12 @@ class DesktopLayout extends React.Component {
       <div id="DesktopLayout">
         <div id={(this.props.renderLandscape) ? 'landscape' : 'portrait'}>
           <div id="sidebar-container">
-            <Sidebar selectedPage={this.props.selectedPage} selectPage={this.props.selectPage}/>
+            <Sidebar
+              selectedPage   = {this.props.selectedPage}
+              selectPage     = {this.props.selectPage}
+              selectedChatId = {this.props.selectedChatId}
+              selectChat     = {this.props.selectChat}
+              />
           </div>
           <div id="main-content-container"></div>
         </div>

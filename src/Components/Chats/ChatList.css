@@ -52,6 +52,11 @@
   background-color: var(--color-bg-4);
 }
 
+#ChatTab.selected {
+  background-image: var(--gradient-1);
+  color: var(--color-text-1);
+}
+
 #ChatTab #left-container {
   display: flex;
   flex-grow: 1;

@@ -27,7 +27,7 @@ import ICON_FRIENDS_SELECTED   from '../../Images/icons/friends_icon_filled_whit
 
 let CHATS = [];
 for (let i = 0; i < 30; i++) {
-  CHATS.push({'title': `chat #${i}`});
+  CHATS.push({'title': `chat #${i}`, 'id': `chatid=${i}`});
 }
 
 
@@ -75,7 +75,11 @@ class Sidebar extends React.Component {
           </button>
         </div>
         <div id="bottom-container">
-          <ChatList chats={CHATS}/>
+          <ChatList
+            chats          = {CHATS}
+            selectChat     = {this.props.selectChat}
+            selectedChatId = {this.props.selectedChatId}
+            />
         </div>
       </div>
     );

@@ -27,6 +27,7 @@ class App extends React.Component {
     super();
     this.state = {
       selectedPage: 'home',
+      selectedChatId: '',
       window: { width: 0, height: 0}
     };
 
@@ -48,6 +49,20 @@ class App extends React.Component {
 
   // onInput Interactions ------------------------------------------------------
 
+  // This function accomplishes two things:
+  //  1) it selects a chat for the user to focus on, as given by the chatId
+  //  2) it changes selectedPage to be 'chats'
+  selectChat = (chatId) => {
+    this.setState({'selectedPage': 'chats', 'selectedChatId': chatId});
+  }
+
+  // this function accomplishes 2 things:
+  //  1) it updates the selected page
+  //  2) it deselects any state values for a specific page (ie: chat info)
+  selectPage = (page) => {
+    this.setState({'selectedPage': page, 'selectedChatId': ''});
+  }
+
   // Render --------------------------------------------------------------------
 
   // Renders <App/> in landscape, portrait, and mobile formats
@@ -59,7 +74,7 @@ class App extends React.Component {
           <div id="mobile">
             <MobileLayout
               selectedPage = {this.state.selectedPage}
-              selectPage   = {(newPage) => this.setState({'selectedPage': newPage})}
+              selectPage   = {this.selectPage}
               />
           </div>
         </div>
@@ -72,7 +87,9 @@ class App extends React.Component {
         <DesktopLayout
           renderLandscape = {(this.state.window.width > this.state.window.height)}
           selectedPage    = {this.state.selectedPage}
-          selectPage      = {(newPage) => this.setState({'selectedPage': newPage})}
+          selectPage      = {this.selectPage}
+          selectedChatId  = {this.state.selectedChatId}
+          selectChat      = {this.selectChat}
           />
       </div>
     );

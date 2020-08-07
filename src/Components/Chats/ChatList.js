@@ -33,7 +33,10 @@ class ChatList extends React.Component {
       tabsToRender.push(
         <div className="chat-tab-container">
           <ChatTab
-            title={chatObj.title}
+            chatId     = {chatObj.id}
+            title      = {chatObj.title}
+            selectChat = {this.props.selectChat}
+            selected   = {(chatObj.id === this.props.selectedChatId)}
             />
         </div>
       );
@@ -66,8 +69,9 @@ class ChatList extends React.Component {
 
 class ChatTab extends React.Component {
   render() {
+    let containerCSS = (this.props.selected) ? 'selected' : 'hoverable';
     return (
-      <div id="ChatTab" className="hoverable">
+      <div id="ChatTab" className={containerCSS} onClick={() => this.props.selectChat(this.props.chatId)}>
         <div id="left-container">
           <div id="img-container"></div>
           <div id="text-container">
