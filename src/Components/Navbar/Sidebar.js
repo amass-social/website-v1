@@ -10,16 +10,26 @@
 import React from 'react';
 import './Sidebar.css';
 
+// components
+import ChatList from '../Chats/ChatList.js';
+
 // images
 import ICON_HOME_UNSELECTED    from '../../Images/icons/feed_icon.png';
 import ICON_HOME_SELECTED      from '../../Images/icons/feed_icon_filled_white.png';
 import ICON_LIBRARY_UNSELECTED from '../../Images/icons/library_icon.png';
 import ICON_LIBRARY_SELECTED   from '../../Images/icons/library_icon_filled_white.png';
-import ICON_CHAT_UNSELECTED    from '../../Images/icons/chat_icon.png';
 import ICON_ACCOUNT_UNSELECTED from '../../Images/icons/account_icon.png';
 import ICON_ACCOUNT_SELECTED   from '../../Images/icons/account_icon_filled_white.png';
 import ICON_FRIENDS_UNSELECTED from '../../Images/icons/friends_icon.png';
 import ICON_FRIENDS_SELECTED   from '../../Images/icons/friends_icon_filled_white.png';
+
+// Constants -------------------------------------------------------------------
+
+let CHATS = [];
+for (let i = 0; i < 30; i++) {
+  CHATS.push({'title': `chat #${i}`});
+}
+
 
 // =============================================================================
 // <Sidebar/>
@@ -65,14 +75,7 @@ class Sidebar extends React.Component {
           </button>
         </div>
         <div id="bottom-container">
-          <div id="chat-title-row">
-            <h2>Chats</h2>
-            <img id="chat-icon" src={ICON_CHAT_UNSELECTED} alt="chat-icon"/>
-          </div>
-          <div id="chat-container">
-            <p>pinned chats...</p>
-            <p>chats will go here...</p>
-          </div>
+          <ChatList chats={CHATS}/>
         </div>
       </div>
     );
