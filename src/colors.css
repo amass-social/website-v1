@@ -18,4 +18,7 @@
   /* Gradients */
   --gradient-1: linear-gradient(141deg, #526FFF 0%, #767BF0 51%, #8377DE 75%);
   --color-gradient-1: #526FFF;
+
+  /* shadow boxes */
+  --box-shadow-1: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }

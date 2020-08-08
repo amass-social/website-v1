@@ -68,10 +68,97 @@ class ChatList extends React.Component {
 // =============================================================================
 
 class ChatTab extends React.Component {
+
+  constructor() {
+    super();
+    this.dimensionParams =  ['x', 'y', 'width', 'height', 'top', 'left'];
+    this.popupWidth  = 400;
+    this.popupHeight = 600;
+    let dimensions = {};
+    for (let i = 0; i < this.dimensionParams.length; i++) {
+      dimensions[this.dimensionParams[i]] = 0;
+    }
+    this.state = {
+      hoverActive: false,
+      dimensions: dimensions
+    };
+  }
+
+
+  onMouseEnter = (e) => {
+    this.setState({
+      hoverActive: true,
+    })
+  }
+
+
+  onMouseLeave = () => {
+    this.setState({
+      hoverActive: false
+    });
+  }
+
+  // gets the dimensions of this component and positioning data according to the viewport
+  // following: https://www.pluralsight.com/tech-blog/getting-size-and-position-of-an-element-in-react/
+  extractDimensions = (el) => {
+    if (!el) { return; }
+
+    let dim               = el.getBoundingClientRect();
+    let changeFound       = false;
+    let updatedDimensions = {};
+    for (let i = 0; i < this.dimensionParams.length; i++) {
+      let key = this.dimensionParams[i];
+      updatedDimensions[key] = dim[key];
+      if (dim[key] !== this.state.dimensions[key]) {
+        changeFound = true;
+      }
+    }
+
+    if (changeFound) {
+      this.setState({
+        dimensions: updatedDimensions
+      });
+    }
+  }
+
+
+  // render --------------------------------------------------------------------
+
+  renderPopup = () => {
+    if (this.state.hoverActive === false || this.props.selected === true) { return; }
+
+    // get location of the popup to be rendered position:fixed
+    let xLocation = this.state.dimensions.width + this.state.dimensions.left;
+    let yLocation = this.state.dimensions.height + this.state.dimensions.top - this.popupHeight/2;
+    yLocation = (yLocation + this.popupHeight > window.innerHeight) ? window.innerHeight - this.popupHeight - 10 : yLocation;
+    yLocation = (yLocation <= 0) ? 10 : yLocation;
+
+    return (
+      <div id="popup-container" style={{
+          'left'  : xLocation,
+          'top'   : yLocation,
+          'height': `${this.popupHeight}px`,
+          'width' : `${this.popupWidth}px`
+        }}>
+        <div id="popup-content-container">
+          <p>{this.props.chatId}</p>
+        </div>
+      </div>
+    );
+  }
+
+
   render() {
     let containerCSS = (this.props.selected) ? 'selected' : 'hoverable';
     return (
-      <div id="ChatTab" className={containerCSS} onClick={() => this.props.selectChat(this.props.chatId)}>
+      <div
+        id="ChatTab"
+        className={containerCSS}
+        onClick={() => this.props.selectChat(this.props.chatId)}
+        onMouseEnter={(e) => this.onMouseEnter(e)}
+        onMouseLeave={this.onMouseLeave}
+        ref={(el) => this.extractDimensions(el)}>
+
         <div id="left-container">
           <div id="img-container"></div>
           <div id="text-container">
@@ -82,6 +169,8 @@ class ChatTab extends React.Component {
         <div id="alert-container">
           <p>100</p>
         </div>
+
+        {this.renderPopup()}
       </div>
     );
   }
