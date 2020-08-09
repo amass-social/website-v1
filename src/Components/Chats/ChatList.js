@@ -9,6 +9,16 @@
 
   ChatList also contains <ChatTab/>, a component that:
     - represents a single chat in the <ChatList/>
+    - when the user hovers over a <ChatTab/>, it will render a <ChatPopup/> with additional details about the chat
+    - when the user clicks a <ChatTab/>, it will select the chat page
+
+  ChatList also contains <ChatPopup/>, a component that:
+    - shows at-a-glance information about a chat, including:
+      -> the participants in the convo
+      -> the original post that was shared that the conversation started from
+      -> the recent messages in the chat
+      -> the ability to send a message directly from the popup
+    - This component is rendered by <ChatTab/>
 */
 
 // Imports ---------------------------------------------------------------------
@@ -141,7 +151,7 @@ class ChatTab extends React.Component {
           'width' : `${this.popupWidth}px`
         }}>
         <div id="popup-content-container">
-          <p>{this.props.chatId}</p>
+          <ChatPopup/>
         </div>
       </div>
     );
@@ -173,6 +183,42 @@ class ChatTab extends React.Component {
         {this.renderPopup()}
       </div>
     );
+  }
+}
+
+
+// =============================================================================
+// <ChatPopup/>
+// =============================================================================
+
+class ChatPopup extends React.Component {
+  render() {
+    return(
+      <div id="ChatPopup">
+        <div id="top-container">
+          <div id="participants-container">
+            <div className="group">
+              <div id="participants-icons-container">
+              </div>
+              <h3>participants</h3>
+            </div>
+            <div className="group">
+              <h3 id="open-menu-button">&#8942;</h3>
+            </div>
+          </div>
+          <div id="about-post-container">
+            <div id="post-image-container">
+              <div id="post-image"></div>
+            </div>
+            <div id="post-title-container">
+              <h3>title</h3>
+              <p>domain</p>
+            </div>
+          </div>
+        </div>
+        <div id="messages-container"></div>
+      </div>
+    )
   }
 }
 

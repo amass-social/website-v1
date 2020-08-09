@@ -6,11 +6,14 @@
 
 :root {
   /* Background colors */
-  --color-bg-1: white;
+  --color-bg-1: white;    /* lights */
   --color-bg-2: #f9f9f9;
   --color-bg-3: #eeeeee;
   --color-bg-4: #dddddd;
   --color-bg-5: #cccccc;
+
+  --color-bg-dark-1: black; /* darks */
+  --color-bg-dark-2: #111111;
 
   /* Text colors */
   --color-text-1: white;
