@@ -26,6 +26,9 @@
 import React from 'react';
 import './ChatList.css';
 
+// components
+import Chat from './Chat.js';
+
 // images
 import ICON_CHAT_UNSELECTED    from '../../Images/icons/chat_icon.png';
 
@@ -140,8 +143,8 @@ class ChatTab extends React.Component {
     // get location of the popup to be rendered position:fixed
     let xLocation = this.state.dimensions.width + this.state.dimensions.left;
     let yLocation = this.state.dimensions.height + this.state.dimensions.top - this.popupHeight/2;
-    yLocation = (yLocation + this.popupHeight > window.innerHeight) ? window.innerHeight - this.popupHeight - 10 : yLocation;
-    yLocation = (yLocation <= 0) ? 10 : yLocation;
+    yLocation = (yLocation + this.popupHeight > window.innerHeight - 10) ? window.innerHeight - this.popupHeight - 10 : yLocation;
+    yLocation = (yLocation < 10) ? 10 : yLocation;
 
     return (
       <div id="popup-container" style={{
@@ -149,7 +152,8 @@ class ChatTab extends React.Component {
           'top'   : yLocation,
           'height': `${this.popupHeight}px`,
           'width' : `${this.popupWidth}px`
-        }}>
+        }}
+        onClick={(e) => e.stopPropagation() /* prevents parent <ChatTab/> from being influenced by clicks to popup*/}>
         <div id="popup-content-container">
           <ChatPopup/>
         </div>
@@ -216,7 +220,9 @@ class ChatPopup extends React.Component {
             </div>
           </div>
         </div>
-        <div id="messages-container"></div>
+        <div id="messages-container">
+          <Chat/>
+        </div>
       </div>
     )
   }
