@@ -45,8 +45,47 @@ class ChatInput extends React.Component {
   constructor() {
     super();
     this.state = {
+
+    };
+  }
+
+
+  // render --------------------------------------------------------------------
+
+  render() {
+    return (
+      <div id="ChatInput">
+        <div id="text-area-container">
+          <AdjustableTextArea/>
+        </div>
+        {/* (this.state.text.length === 0) && <div id="attachments-button"></div> */}
+        <div id="emojis-button"></div>
+      </div>
+    );
+  }
+}
+
+
+// =============================================================================
+// <AdjustableTextArea/>
+// =============================================================================
+
+
+
+class AdjustableTextArea extends React.Component {
+
+  constructor() {
+    super();
+    this.lineHeight = 20; // <- how tall a standard line of text is in our <textarea/>
+    this.dimensionParams = ['width', 'height'];
+    let dimensions = {};
+    for (let i = 0; i < this.dimensionParams.length; i++) {
+      dimensions[this.dimensionParams[i]] = 0;
+    }
+    this.state = {
       text        : "",
-      shiftActive : false
+      shiftActive : false,
+      dimensions  : dimensions
     };
   }
 
@@ -68,11 +107,43 @@ class ChatInput extends React.Component {
     }
   }
 
+
+  // gets the dimensions of this component and positioning data according to the viewport
+  // following: https://www.pluralsight.com/tech-blog/getting-size-and-position-of-an-element-in-react/
+  extractDimensions = (el) => {
+    if (!el) { return; }
+
+    let dim               = el.getBoundingClientRect();
+    let changeFound       = false;
+    let updatedDimensions = {};
+    for (let i = 0; i < this.dimensionParams.length; i++) {
+      let key = this.dimensionParams[i];
+      updatedDimensions[key] = dim[key];
+      if (dim[key] !== this.state.dimensions[key]) {
+        changeFound = true;
+      }
+    }
+
+    if (changeFound) {
+      this.setState({
+        dimensions: updatedDimensions
+      });
+    }
+  }
+
   // the user typed something into the input
   // -> we need to check if they pressed 'enter' to send the message or 'shift+enter' to newline
   // -> also need to be aware that a user deleting text up to a '\n' doesn't count as pressing enter
   updateText = (e) => {
     let text = e.target.value;
+
+    // in case user deletes all the text, we want to resize our input
+    if (text.length === 0) {
+      this.setState({text: "", dimensions: {width: 0, height: 0}});
+      return;
+    }
+
+    // otherwise, we want to either update text or 'send' the message
     if (text !== this.state.text) {
       if (
         (text.length > 2)                  &&
@@ -89,22 +160,51 @@ class ChatInput extends React.Component {
     }
   }
 
-  // render --------------------------------------------------------------------
 
-  render() {
+  // we render an invisible div w/ the same text styling as our areatext
+  renderInvisibleTextContainer = () => {
+
+    // in the case where we have a trailing newline, we want to add a renderable character
+    // to make this visible to the div
+    let text = this.state.text;
+    if (text.length === 0) {
+      text = '.';
+    }
+    if (text[text.length - 1] === '\n') {
+      text = `${text}.`;
+    }
+
     return (
-      <div id="ChatInput">
-        <textarea
-          id="text-input"
-          style={{'height': `${this.state.text.split("\n", 5).length * 20}px`}}
-          value={this.state.text}
-          onChange={this.updateText}
-          />
-        {(this.state.text.length === 0) && <div id="attachments-button"></div>}
-        <div id="emojis-button"></div>
+      <div
+        id="invisible-text-container"
+        className="spacing-details"
+        style={{'max-height': `${this.lineHeight * this.props.lineLimit}px`}}
+        ref={(el) => this.extractDimensions(el)}>
+        {text}
       </div>
     );
   }
+
+
+  render() {
+    return (
+      <div id="AdjustableTextArea">
+        {this.renderInvisibleTextContainer()}
+        <textarea
+          id="text-input"
+          className="spacing-details"
+          style={{'height': `${this.state.dimensions.height}px`}}
+          value={this.state.text}
+          onChange={this.updateText}
+          />
+      </div>
+    )
+  }
 }
+
+
+AdjustableTextArea.defaultProps = {
+  lineLimit: 6 // <- the number of lines that the <textarea/> can expand to
+};
 
 export default Chat;

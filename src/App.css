@@ -13,7 +13,7 @@ h2, h3, h4 {
   margin: 0px;
 }
 
-p, button, input, textarea {
+p, button, input, textarea, div {
   font-family: 'FiraSansCondensed-Regular';
   margin: 0px;
 }
