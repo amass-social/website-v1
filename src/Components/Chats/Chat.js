@@ -45,10 +45,14 @@ class ChatInput extends React.Component {
   constructor() {
     super();
     this.state = {
-
+      text: ""
     };
   }
 
+  // sends the user's message and wipes state
+  sendText = (textToSend) => {
+    this.setState({text: ""});
+  }
 
   // render --------------------------------------------------------------------
 
@@ -56,9 +60,13 @@ class ChatInput extends React.Component {
     return (
       <div id="ChatInput">
         <div id="text-area-container">
-          <AdjustableTextArea/>
+          <AdjustableTextArea
+            text       = {this.state.text}
+            updateText = {(newText) => {this.setState({text: newText})}}
+            submitText = {this.sendText}
+            />
         </div>
-        {/* (this.state.text.length === 0) && <div id="attachments-button"></div> */}
+        {(this.state.text.length === 0) && <div id="attachments-button"></div>}
         <div id="emojis-button"></div>
       </div>
     );
@@ -83,7 +91,6 @@ class AdjustableTextArea extends React.Component {
       dimensions[this.dimensionParams[i]] = 0;
     }
     this.state = {
-      text        : "",
       shiftActive : false,
       dimensions  : dimensions
     };
@@ -139,23 +146,22 @@ class AdjustableTextArea extends React.Component {
 
     // in case user deletes all the text, we want to resize our input
     if (text.length === 0) {
-      this.setState({text: "", dimensions: {width: 0, height: 0}});
+      this.setState({dimensions: {width: 0, height: 0}});
+      this.props.updateText(text);
       return;
     }
 
     // otherwise, we want to either update text or 'send' the message
-    if (text !== this.state.text) {
+    if (text !== this.props.text) {
       if (
         (text.length > 2)                  &&
         (text[text.length - 1] === "\n")   &&
         (this.state.shiftActive === false) &&
-        (text.length > this.state.text.length)) {
+        (text.length > this.props.text.length)) {
 
-        // TODO: remove trailing and leading whitespace before sending the message
-        alert(`this should send the message: ${text}`)
-        this.setState({text: ""});
+        this.props.submitText(text.trim()); // remove trailing/leading whitespace
       } else {
-        this.setState({text: e.target.value});
+        this.props.updateText(text);
       }
     }
   }
@@ -166,7 +172,7 @@ class AdjustableTextArea extends React.Component {
 
     // in the case where we have a trailing newline, we want to add a renderable character
     // to make this visible to the div
-    let text = this.state.text;
+    let text = this.props.text;
     if (text.length === 0) {
       text = '.';
     }
@@ -194,7 +200,7 @@ class AdjustableTextArea extends React.Component {
           id="text-input"
           className="spacing-details"
           style={{'height': `${this.state.dimensions.height}px`}}
-          value={this.state.text}
+          value={this.props.text}
           onChange={this.updateText}
           />
       </div>
