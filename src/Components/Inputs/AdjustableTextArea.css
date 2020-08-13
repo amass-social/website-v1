@@ -1,0 +1,42 @@
+#AdjustableTextArea {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+#AdjustableTextArea #text-input {
+  width: 100%;
+  min-height: 20px;
+  border: 1px solid var(--color-bg-5);
+  border-radius: 2px;
+  background-color: var(--color-bg-2);
+  resize: none;
+}
+
+
+#AdjustableTextArea #text-input:focus {
+  outline: none;
+}
+
+#AdjustableTextArea #invisible-text-container {
+  width: calc(100% - 10px);
+  max-width: 100%;
+  min-height: 20px;
+  position: absolute;
+  top: 0;
+  white-space: pre-wrap;
+  opacity: 0;
+  background-color: red;
+  z-index: -1;
+  overflow-y: hidden;
+}
+
+
+#AdjustableTextArea .spacing-details {
+  padding: 5px;
+  padding-bottom: 0px;
+  font-size: 1.0em;
+  text-align: left;
+}
