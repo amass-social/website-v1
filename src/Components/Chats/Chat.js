@@ -65,23 +65,28 @@ class ChatInput extends React.Component {
   // render --------------------------------------------------------------------
 
   renderEmojiSelect = () => {
-    if (this.state.emojiSelectActive === false) { return; }
+
+    if (this.state.emojiSelectActive === false) {
+      return (
+        <div id="emoji-select-anchor"></div>
+      )
+    }
 
     return (
-      <div id="emoji-select-row">
+      <div id="emoji-select-anchor">
         <div id="emoji-select-backdrop" onMouseLeave={(e) => e.stopPropagation()} onClick={this.onClick_toggleEmojiSelect}></div>
         <div id="emoji-select-container">
           <EmojiSelect/>
         </div>
       </div>
-    )
+    );
   }
+
 
 
   render() {
     return (
       <div id="ChatInput">
-        {this.renderEmojiSelect()}
         <div id="text-input-row">
           <div id="text-area-container">
             <AdjustableTextArea
@@ -92,6 +97,7 @@ class ChatInput extends React.Component {
           </div>
           {(this.state.text.length === 0) && <div id="attachments-button"></div>}
           <div id="emojis-button" onClick={this.onClick_toggleEmojiSelect}></div>
+          {this.renderEmojiSelect()}
         </div>
       </div>
     );
