@@ -81,7 +81,7 @@ class ChatList extends React.Component {
   render() {
     return (
       <div id="ChatList" onMouseLeave={this.clearHovered}>
-        <div id="chat-title-row" onMouseLeave={this.clearHovered}>
+        <div id="chat-title-row" onMouseEnter={this.clearHovered}>
           <h2>Chats</h2>
           <img id="chat-icon" src={ICON_CHAT_UNSELECTED} alt="chat-icon"/>
         </div>

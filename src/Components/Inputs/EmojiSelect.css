@@ -1,5 +1,111 @@
 #EmojiSelect {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+}
+
+#EmojiSelect #top-container {
+  width: 100%;
+  flex-grow: 0;
+  border-bottom: 1px solid var(--color-bg-4);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-2);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+#EmojiSelect #top-container #search-bar-container {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 15px;
+  background-image: var(--gradient-1);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  position: relative;
+}
+
+#EmojiSelect #top-container #search-bar-container #search-bar {
+  width: 80%;
+  height: 30px;
+  margin-top: 17px;
+  border: 1px solid var(--color-bg-5);
+  padding: 0px 10px;
+}
+
+#EmojiSelect #top-container #emoji-category-container {
+  width: 100%;
+  margin-top: 3px;
+  height: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+#EmojiSelect #top-container #emoji-category-container #emoji-category-button{
+  height: 24px;
+  width: 24px;
+  border-radius: 12px;
+  margin: 0px 5px;
+  background-color: var(--color-bg-4);
+}
+
+
+#EmojiSelect #middle-container {
+  width: 100%;
+  flex-grow: 1;
+  overflow-y: auto;
   background-color: var(--color-bg-1);
+}
+
+#EmojiSelect #bottom-container {
+  width: 100%;
+  height: 40px;
+  flex-grow: 0;
+  margin: 0px;
+  border-top: 1px solid var(--color-bg-4);
+  background-color: var(--color-bg-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+#EmojiSelect #bottom-container #hovered-emoji-container{
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#EmojiSelect #bottom-container #hovered-emoji-container #hovered-emoji {
+  height: 30px;
+  width: 30px;
+  background-color: var(--color-bg-4);
+  border-radius: 15px;
+  margin: 0px 10px;
+}
+
+#EmojiSelect #bottom-container #hovered-emoji-container #hovered-emoji-title {
+  font-size: 1.1em;
+}
+
+
+#EmojiSelect #bottom-container #skin-color-options-container {
+  display: flex;
+}
+#EmojiSelect #bottom-container #select-emoji-color-button {
+  height: 24px;
+  width: 24px;
+  border-radius: 12px;
+  background-color: var(--color-bg-4);
+  margin: 0px 5px;
+  cursor: pointer;
+}
+
+
+#EmojiSelect #bottom-container {
+
 }
