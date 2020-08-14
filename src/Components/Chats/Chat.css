@@ -37,6 +37,7 @@
 #ChatInput #text-input-row #text-area-container {
   flex-grow: 1;
   margin: 0px 10px;
+  margin-bottom: 2px;
 }
 
 
@@ -49,13 +50,13 @@
 
 
 #ChatInput #emojis-button {
-  height: 30px;
-  width: 30px;
+  font-size: 30px;
   margin-right: 10px;
   z-index: 110;
-  background-color: var(--color-bg-1);
   cursor: pointer;
+  margin-bottom: 0px;
 }
+
 
 #ChatInput #emoji-select-anchor {
   display: none;

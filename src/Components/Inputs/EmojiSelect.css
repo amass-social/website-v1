@@ -57,17 +57,31 @@
   flex-grow: 1;
   overflow-y: auto;
   background-color: var(--color-bg-1);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#EmojiSelect #middle-container #emoji {
+  font-size: 30px;
+  height: 35px;
+  width: 35px;
+  margin: 5px;
 }
 
 #EmojiSelect #bottom-container {
   width: 100%;
+  max-width: 100%;
   height: 40px;
+  overflow: hidden;
   flex-grow: 0;
   margin: 0px;
+  flex-shrink: 0;
   border-top: 1px solid var(--color-bg-4);
   background-color: var(--color-bg-2);
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
@@ -75,27 +89,45 @@
 
 #EmojiSelect #bottom-container #hovered-emoji-container{
   height: 100%;
+  flex-grow: 1;
+  width: 0px;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
 #EmojiSelect #bottom-container #hovered-emoji-container #hovered-emoji {
+  font-size: 28px;
+  margin: 0px 10px;
+}
+
+#EmojiSelect #bottom-container #hovered-emoji-container #hovered-emoji-missing {
   height: 30px;
   width: 30px;
-  background-color: var(--color-bg-4);
+  border: 1px solid var(--color-bg-4);
   border-radius: 15px;
   margin: 0px 10px;
 }
 
 #EmojiSelect #bottom-container #hovered-emoji-container #hovered-emoji-title {
-  font-size: 1.1em;
+  font-size: 1.0em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-overflow: clip;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 
 #EmojiSelect #bottom-container #skin-color-options-container {
   display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  flex-grow: 0;
+  height: 100%;
 }
+
 #EmojiSelect #bottom-container #select-emoji-color-button {
   height: 24px;
   width: 24px;
@@ -103,9 +135,4 @@
   background-color: var(--color-bg-4);
   margin: 0px 5px;
   cursor: pointer;
-}
-
-
-#EmojiSelect #bottom-container {
-
 }

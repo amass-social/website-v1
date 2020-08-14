@@ -11,6 +11,14 @@
 import React from 'react';
 import './EmojiSelect.css';
 
+// npm packages
+import RenderEmoji from 'react-easy-emoji';
+
+
+// Constants -------------------------------------------------------------------
+
+const DEFINITIONS = require('../../Constants/Emojis/definitions.json');
+// const CATEGORIES  = require('../../Constants/Emojis/categories.json');
 
 // =============================================================================
 // <EmojiSelect/>
@@ -21,7 +29,8 @@ class EmojiSelect extends React.Component {
   constructor() {
     super();
     this.state = {
-      selectSkinColorActive: false
+      selectSkinColorActive : false,
+      hoveredEmojiId        : ''
     };
   }
 
@@ -29,6 +38,12 @@ class EmojiSelect extends React.Component {
 
   onClick_selectSkinColor = () => {
     this.setState({selectSkinColorActive: false});
+  }
+
+  onMouseHoverEmoji = (emojiId) => {
+    if (this.state.hoveredEmojiId !== emojiId) {
+      this.setState({hoveredEmojiId: emojiId});
+    }
   }
 
   // Render --------------------------------------------------------------------
@@ -57,12 +72,21 @@ class EmojiSelect extends React.Component {
 
 
   renderCurrentlyHoveredEmoji = () => {
-    if (this.state.selectSkinColorActive === true) { return (<div></div>); }
+    if (this.state.selectSkinColorActive === true) { return (<div id="hovered-emoji-missing"></div>); }
 
+    if (this.state.hoveredEmojiId === '') {
+      return (
+        <div id="hovered-emoji-container">
+          <div id="hovered-emoji-missing"></div>
+        </div>
+      );
+    }
+
+    let emoji = DEFINITIONS[this.state.hoveredEmojiId]['default']['emoji'];
     return (
       <div id="hovered-emoji-container">
-        <div id="hovered-emoji"></div>
-        <p id="hovered-emoji-title">title</p>
+        <div id="hovered-emoji">{RenderEmoji(`${emoji}`)}</div>
+        <p id="hovered-emoji-title">{this.state.hoveredEmojiId}</p>
       </div>
     );
   }
@@ -87,11 +111,29 @@ class EmojiSelect extends React.Component {
     );
   }
 
+
+  renderEmojis = () => {
+    let emojisToRender = [];
+    for (let emojiId in DEFINITIONS) {
+      let emoji = RenderEmoji(DEFINITIONS[emojiId]['default']['emoji']);
+      emojisToRender.push(
+        <p id="emoji" onMouseEnter={() => this.onMouseHoverEmoji(emojiId)}>
+          {emoji}
+        </p>
+      );
+      if (emojisToRender.length === 50) {
+        return emojisToRender;
+      }
+    }
+  }
+
   render() {
     return (
       <div id="EmojiSelect">
         {this.renderTopBar()}
-        <div id="middle-container"></div>
+        <div id="middle-container">
+          {this.renderEmojis()}
+        </div>
         <div id="bottom-container">
           {this.renderCurrentlyHoveredEmoji()}
           {this.renderSelectEmojiColor()}

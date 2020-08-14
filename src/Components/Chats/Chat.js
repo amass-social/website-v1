@@ -16,6 +16,10 @@
 import React from 'react';
 import './Chat.css';
 
+// npm
+import RenderEmoji from 'react-easy-emoji';
+
+// components
 import AdjustableTextArea from '../Inputs/AdjustableTextArea.js';
 import EmojiSelect        from '../Inputs/EmojiSelect.js';
 
@@ -83,8 +87,9 @@ class ChatInput extends React.Component {
   }
 
 
-
   render() {
+
+    let renderEmojiButtonText = (this.state.emojiSelectActive) ? '😀' : '🙂';
     return (
       <div id="ChatInput">
         <div id="text-input-row">
@@ -95,8 +100,8 @@ class ChatInput extends React.Component {
               submitText = {this.sendText}
               />
           </div>
-          {(this.state.text.length === 0) && <div id="attachments-button"></div>}
-          <div id="emojis-button" onClick={this.onClick_toggleEmojiSelect}></div>
+          {(this.state.text.length === 0 && false) && <div id="attachments-button"></div>}
+          <div id="emojis-button" onClick={this.onClick_toggleEmojiSelect}>{RenderEmoji(renderEmojiButtonText)}</div>
           {this.renderEmojiSelect()}
         </div>
       </div>
