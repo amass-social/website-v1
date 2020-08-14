@@ -36,10 +36,17 @@
   overflow-y: scroll;
   scrollbar-width: none;
   overflow-x: visible;
+  display: flex;
+  flex-direction: column;
 }
 
 #ChatList #chats-container #chats-container-scroll::-webkit-scrollbar {
   display: none;
+}
+
+#ChatList #chats-container #invisible-hover-boundary {
+  width: 100%;
+  flex-grow: 1;
 }
 
 

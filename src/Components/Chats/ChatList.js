@@ -39,6 +39,24 @@ import ICON_CHAT_UNSELECTED    from '../../Images/icons/chat_icon.png';
 
 class ChatList extends React.Component {
 
+  constructor() {
+    super();
+    this.state = {
+      hoveredChat: ''
+    };
+  }
+
+  setHoveredChat = (chatId) => {
+    if (this.state.hoveredChat !== chatId) {
+      this.setState({hoveredChat: chatId});
+    }
+  }
+
+  clearHovered = () => {
+    this.setHoveredChat('');
+  }
+
+
   renderChatTabs = () => {
     let tabsToRender = [];
     for (let i = 0; i < this.props.chats.length; i++) {
@@ -50,6 +68,8 @@ class ChatList extends React.Component {
             title      = {chatObj.title}
             selectChat = {this.props.selectChat}
             selected   = {(chatObj.id === this.props.selectedChatId)}
+            setHovered = {() => this.setHoveredChat(chatObj.id)}
+            hovered    = {(chatObj.id === this.state.hoveredChat)}
             />
         </div>
       );
@@ -60,14 +80,15 @@ class ChatList extends React.Component {
 
   render() {
     return (
-      <div id="ChatList">
-        <div id="chat-title-row">
+      <div id="ChatList" onMouseLeave={this.clearHovered}>
+        <div id="chat-title-row" onMouseLeave={this.clearHovered}>
           <h2>Chats</h2>
           <img id="chat-icon" src={ICON_CHAT_UNSELECTED} alt="chat-icon"/>
         </div>
         <div id="chats-container">
           <div id="chats-container-scroll">
             {this.renderChatTabs()}
+            <div id="invisible-hover-boundary" onMouseEnter={this.clearHovered}></div>
           </div>
         </div>
       </div>
@@ -92,24 +113,10 @@ class ChatTab extends React.Component {
       dimensions[this.dimensionParams[i]] = 0;
     }
     this.state = {
-      hoverActive: false,
       dimensions: dimensions
     };
   }
 
-
-  onMouseEnter = (e) => {
-    this.setState({
-      hoverActive: true,
-    })
-  }
-
-
-  onMouseLeave = () => {
-    this.setState({
-      hoverActive: false
-    });
-  }
 
   // gets the dimensions of this component and positioning data according to the viewport
   // following: https://www.pluralsight.com/tech-blog/getting-size-and-position-of-an-element-in-react/
@@ -138,7 +145,7 @@ class ChatTab extends React.Component {
   // render --------------------------------------------------------------------
 
   renderPopup = () => {
-    if (this.state.hoverActive === false || this.props.selected === true) { return; }
+    if (this.props.hovered === false || this.props.selected === true) { return; }
 
     // get location of the popup to be rendered position:fixed
     let xLocation = this.state.dimensions.width + this.state.dimensions.left;
@@ -164,16 +171,15 @@ class ChatTab extends React.Component {
 
   render() {
     let containerCSS = '';
-    if (this.state.hoverActive) { containerCSS = 'hovered'; }
-    if (this.props.selected)    { containerCSS = 'selected'; }
+    if (this.props.hovered)  { containerCSS = 'hovered'; }
+    if (this.props.selected) { containerCSS = 'selected'; }
 
     return (
       <div
         id="ChatTab"
         className={containerCSS}
         onClick={() => this.props.selectChat(this.props.chatId)}
-        onMouseEnter={(e) => this.onMouseEnter(e)}
-        onMouseLeave={this.onMouseLeave}
+        onMouseEnter={this.props.setHovered}
         ref={(el) => this.extractDimensions(el)}>
 
         <div id="left-container">
