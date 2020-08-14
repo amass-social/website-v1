@@ -54,7 +54,7 @@
   overflow: visible;
 }
 
-#ChatTab.hoverable:hover {
+#ChatTab.hovered {
   cursor: pointer;
   background-color: var(--color-bg-4);
 }

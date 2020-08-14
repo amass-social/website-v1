@@ -163,7 +163,10 @@ class ChatTab extends React.Component {
 
 
   render() {
-    let containerCSS = (this.props.selected) ? 'selected' : 'hoverable';
+    let containerCSS = '';
+    if (this.state.hoverActive) { containerCSS = 'hovered'; }
+    if (this.props.selected)    { containerCSS = 'selected'; }
+
     return (
       <div
         id="ChatTab"

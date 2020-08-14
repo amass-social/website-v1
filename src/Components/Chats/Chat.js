@@ -17,6 +17,7 @@ import React from 'react';
 import './Chat.css';
 
 import AdjustableTextArea from '../Inputs/AdjustableTextArea.js';
+import EmojiSelect        from '../Inputs/EmojiSelect.js';
 
 // =============================================================================
 // <Chat/>
@@ -46,7 +47,8 @@ class ChatInput extends React.Component {
   constructor() {
     super();
     this.state = {
-      text: ""
+      text              : "",
+      emojiSelectActive : false
     };
   }
 
@@ -55,20 +57,42 @@ class ChatInput extends React.Component {
     this.setState({text: ""});
   }
 
+  onClick_toggleEmojiSelect = () => {
+    this.setState({emojiSelectActive: !this.state.emojiSelectActive});
+    this.forceUpdate();
+  }
+
   // render --------------------------------------------------------------------
+
+  renderEmojiSelect = () => {
+    if (this.state.emojiSelectActive === false) { return; }
+
+    return (
+      <div id="emoji-select-row">
+        <div id="emoji-select-backdrop" onMouseLeave={(e) => e.stopPropagation()} onClick={this.onClick_toggleEmojiSelect}></div>
+        <div id="emoji-select-container">
+          <EmojiSelect/>
+        </div>
+      </div>
+    )
+  }
+
 
   render() {
     return (
       <div id="ChatInput">
-        <div id="text-area-container">
-          <AdjustableTextArea
-            text       = {this.state.text}
-            updateText = {(newText) => {this.setState({text: newText})}}
-            submitText = {this.sendText}
-            />
+        {this.renderEmojiSelect()}
+        <div id="text-input-row">
+          <div id="text-area-container">
+            <AdjustableTextArea
+              text       = {this.state.text}
+              updateText = {(newText) => {this.setState({text: newText})}}
+              submitText = {this.sendText}
+              />
+          </div>
+          {(this.state.text.length === 0) && <div id="attachments-button"></div>}
+          <div id="emojis-button" onClick={this.onClick_toggleEmojiSelect}></div>
         </div>
-        {(this.state.text.length === 0) && <div id="attachments-button"></div>}
-        <div id="emojis-button"></div>
       </div>
     );
   }
