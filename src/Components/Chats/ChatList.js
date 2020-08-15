@@ -106,8 +106,10 @@ class ChatTab extends React.Component {
   constructor() {
     super();
     this.dimensionParams =  ['x', 'y', 'width', 'height', 'top', 'left'];
-    this.popupWidth  = 400;
-    this.popupHeight = 600;
+    this.popupWidth   = 400;
+    this.popupHeight  = 600;
+    this.popupPadding = 75; // <- how much extra space to the top/right/bottom of the popup still counts as "hovering"
+    this.popupMargins = 10; // <- minimum distance the popup can get from the border of the browser viewbox
     let dimensions = {};
     for (let i = 0; i < this.dimensionParams.length; i++) {
       dimensions[this.dimensionParams[i]] = 0;
@@ -148,17 +150,44 @@ class ChatTab extends React.Component {
     if (this.props.hovered === false || this.props.selected === true) { return; }
 
     // get location of the popup to be rendered position:fixed
+    // yLocation cases:
+    //  1) popup isn't low enough for the padding-bottom to change from default
+    //  2) popup is low enough that the padding-bottom should be shrinked to respect margin
+    //  3) popup is too low for margin, so the padding should be 0 and the location should be set to margin
+    //  4) popup is too high, set to margin
+    let height = this.popupHeight + this.popupPadding * 2;
+    let heightNoBottomPadding = this.popupHeight + this.popupPadding;
     let xLocation = this.state.dimensions.width + this.state.dimensions.left;
-    let yLocation = this.state.dimensions.height + this.state.dimensions.top - this.popupHeight/2;
-    yLocation = (yLocation + this.popupHeight > window.innerHeight - 10) ? window.innerHeight - this.popupHeight - 10 : yLocation;
-    yLocation = (yLocation < 10) ? 10 : yLocation;
+    let padding = {
+      'top'    : this.popupPadding,
+      'right'  : this.popupPadding,
+      'bottom' : this.popupPadding,
+      'left'   : 20,
+    }
+
+    let yLocation = this.state.dimensions.height + this.state.dimensions.top - height/2; // case 1)
+    if (yLocation + heightNoBottomPadding > window.innerHeight - this.popupMargins) {
+      yLocation = window.innerHeight + this.popupPadding - height - this.popupMargins; // case 3)
+      padding['bottom'] = this.popupMargins;
+    } else if (yLocation + height > window.innerHeight - this.popupMargins) {
+      padding['bottom'] = window.innerHeight - this.popupMargins - yLocation - heightNoBottomPadding; // case 2)
+    }
+    if (yLocation < this.popupMargins) {
+      yLocation = 0;                      // case 4)
+      padding['top'] = this.popupMargins;
+    }
+
 
     return (
       <div id="popup-container" style={{
-          'left'  : xLocation,
-          'top'   : yLocation,
-          'height': `${this.popupHeight}px`,
-          'width' : `${this.popupWidth}px`
+          'left'          : xLocation,
+          'top'           : yLocation,
+          'height'        : `${this.popupHeight}px`,
+          'width'         : `${this.popupWidth}px`,
+          'paddingTop'    : `${padding['top']}px`,
+          'paddingRight'  : `${padding['right']}px`,
+          'paddingBottom' : `${padding['bottom']}px`,
+          'paddingLeft'   : `${padding['left']}px`
         }}
         onClick={(e) => e.stopPropagation() /* prevents parent <ChatTab/> from being influenced by clicks to popup*/}>
         <div id="popup-content-container">
