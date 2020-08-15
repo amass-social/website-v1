@@ -64,12 +64,16 @@ class ChatInput extends React.Component {
   }
 
   onClick_toggleEmojiSelect = () => {
+    if (this.state.emojiSelectActive === true) {
+      this.childTextArea.current.focusOnTextArea();
+    }
     this.setState({emojiSelectActive: !this.state.emojiSelectActive});
   }
 
   addEmojiToText = (emojiUnicode) => {
     let newText = this.childTextArea.current.addSubstringToText(emojiUnicode);
     this.setState({text: newText, emojiSelectActive: false});
+    this.childTextArea.current.focusOnTextArea();
   }
 
 

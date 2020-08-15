@@ -22,6 +22,7 @@ class AdjustableTextArea extends React.Component {
 
   constructor() {
     super();
+    this.textAreaRef = React.createRef();
     this.lineHeight = 20; // <- how tall a standard line of text is in our <textarea/>
     this.dimensionParams = ['width', 'height'];
     let dimensions = {};
@@ -39,6 +40,7 @@ class AdjustableTextArea extends React.Component {
   componentDidMount() {
     document.addEventListener("keydown", this.registerShift, false);
     document.addEventListener("keyup", this.registerShift, false);
+    this.focusOnTextArea();
   }
 
   componentWillUnmount() {
@@ -93,6 +95,11 @@ class AdjustableTextArea extends React.Component {
     return `${str1}${substring}${str2}`;
   }
 
+  // sets the focus to textarea
+  focusOnTextArea = () => {
+    this.textAreaRef.current.focus();
+  }
+
 
   // the user typed something into the input
   // -> we need to check if they pressed 'enter' to send the message or 'shift+enter' to newline
@@ -145,6 +152,7 @@ class AdjustableTextArea extends React.Component {
 
 
   render() {
+    this.setCursorLocation(this.textAreaRef.current);
     return (
       <div id="AdjustableTextArea">
         {this.renderInvisibleTextContainer()}
@@ -155,7 +163,7 @@ class AdjustableTextArea extends React.Component {
           value={this.props.text}
           onChange={this.updateText}
           onKeyDown={this.checkForSubmit}
-          ref={(el) => this.setCursorLocation(el)}
+          ref={this.textAreaRef}
           />
       </div>
     )
