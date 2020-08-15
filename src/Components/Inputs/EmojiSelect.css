@@ -68,6 +68,7 @@
   height: 35px;
   width: 35px;
   margin: 5px;
+  cursor: pointer;
 }
 
 #EmojiSelect #bottom-container {

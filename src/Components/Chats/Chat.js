@@ -54,17 +54,24 @@ class ChatInput extends React.Component {
       text              : "",
       emojiSelectActive : false
     };
+    this.childTextArea = React.createRef(); // <- create this ref so we can call <AdjustableTextArea/>.addSubstringToText() for emojis
   }
 
   // sends the user's message and wipes state
   sendText = (textToSend) => {
-    this.setState({text: ""});
+    this.setState({text: "", emojiSelectActive: false});
   }
 
   onClick_toggleEmojiSelect = () => {
     this.setState({emojiSelectActive: !this.state.emojiSelectActive});
-    this.forceUpdate();
   }
+
+  addEmojiToText = (emojiUnicode) => {
+    let newText = this.childTextArea.current.addSubstringToText(emojiUnicode);
+    this.setState({text: newText, emojiSelectActive: false});
+  }
+
+
 
   // render --------------------------------------------------------------------
 
@@ -80,7 +87,7 @@ class ChatInput extends React.Component {
       <div id="emoji-select-anchor">
         <div id="emoji-select-backdrop" onMouseLeave={(e) => e.stopPropagation()} onClick={this.onClick_toggleEmojiSelect}></div>
         <div id="emoji-select-container">
-          <EmojiSelect/>
+          <EmojiSelect selectEmoji={this.addEmojiToText}/>
         </div>
       </div>
     );
@@ -88,13 +95,13 @@ class ChatInput extends React.Component {
 
 
   render() {
-
     let renderEmojiButtonText = (this.state.emojiSelectActive) ? '😀' : '🙂';
     return (
       <div id="ChatInput">
         <div id="text-input-row">
           <div id="text-area-container">
             <AdjustableTextArea
+              ref        = {this.childTextArea}
               text       = {this.state.text}
               updateText = {(newText) => {this.setState({text: newText})}}
               submitText = {this.sendText}

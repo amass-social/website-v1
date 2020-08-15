@@ -29,8 +29,9 @@ class AdjustableTextArea extends React.Component {
       dimensions[this.dimensionParams[i]] = 0;
     }
     this.state = {
-      shiftActive : false,
-      dimensions  : dimensions
+      shiftActive    : false,
+      dimensions     : dimensions,
+      cursorLocation : 0
     };
   }
 
@@ -75,6 +76,23 @@ class AdjustableTextArea extends React.Component {
       });
     }
   }
+
+
+  // keeps track of the location of the cursor within the <textarea/>
+  setCursorLocation = (el) => {
+    if (!el) { return; }
+    if (el.selectionStart !== this.state.cursorLocation) {
+      this.setState({cursorLocation: el.selectionStart});
+    }
+  }
+
+  // this function can be called by a parent (using a ref), allowing emojis to be inserted at the right location
+  addSubstringToText = (substring) => {
+    let str1 = this.props.text.substring(0, this.state.cursorLocation);
+    let str2 = this.props.text.substring(this.state.cursorLocation, this.props.text.length);
+    return `${str1}${substring}${str2}`;
+  }
+
 
   // the user typed something into the input
   // -> we need to check if they pressed 'enter' to send the message or 'shift+enter' to newline
@@ -140,6 +158,7 @@ class AdjustableTextArea extends React.Component {
           style={{'height': `${this.state.dimensions.height}px`}}
           value={this.props.text}
           onChange={this.updateText}
+          ref={(el) => this.setCursorLocation(el)}
           />
       </div>
     )

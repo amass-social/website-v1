@@ -115,10 +115,14 @@ class EmojiSelect extends React.Component {
   renderEmojis = () => {
     let emojisToRender = [];
     for (let emojiId in DEFINITIONS) {
-      let emoji = RenderEmoji(DEFINITIONS[emojiId]['default']['emoji']);
+      let emojiUnicode = DEFINITIONS[emojiId]['default']['emoji'];
+      let emojiRendered = RenderEmoji(emojiUnicode);
       emojisToRender.push(
-        <p id="emoji" onMouseEnter={() => this.onMouseHoverEmoji(emojiId)}>
-          {emoji}
+        <p
+          id="emoji"
+          onMouseEnter={() => this.onMouseHoverEmoji(emojiId)}
+          onClick={() => this.props.selectEmoji(emojiUnicode)}>
+          {emojiRendered}
         </p>
       );
       if (emojisToRender.length === 50) {
