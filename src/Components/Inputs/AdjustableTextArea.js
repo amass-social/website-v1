@@ -107,21 +107,17 @@ class AdjustableTextArea extends React.Component {
       return;
     }
 
-    // otherwise, we want to either update text or 'send' the message
-    if (text !== this.props.text) {
-      if (
-        (text.length > 2)                  &&
-        (text[text.length - 1] === "\n")   &&
-        (this.state.shiftActive === false) &&
-        (text.length > this.props.text.length)) {
-
-        this.props.submitText(text.trim()); // remove trailing/leading whitespace
-      } else {
-        this.props.updateText(text);
-      }
-    }
+    this.props.updateText(text);
   }
 
+
+  checkForSubmit = (e) => {
+    if (this.state.shiftActive === true) { return; }
+    if (this.props.text.length > 0 && e.keyCode === 13) {
+      this.props.submitText(this.props.text.trim());
+      e.preventDefault();
+    }
+  }
 
   // we render an invisible div w/ the same text styling as our areatext
   renderInvisibleTextContainer = () => {
@@ -158,6 +154,7 @@ class AdjustableTextArea extends React.Component {
           style={{'height': `${this.state.dimensions.height}px`}}
           value={this.props.text}
           onChange={this.updateText}
+          onKeyDown={this.checkForSubmit}
           ref={(el) => this.setCursorLocation(el)}
           />
       </div>

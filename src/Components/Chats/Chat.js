@@ -59,6 +59,7 @@ class ChatInput extends React.Component {
 
   // sends the user's message and wipes state
   sendText = (textToSend) => {
+    console.log(`sending: ${textToSend}`);
     this.setState({text: "", emojiSelectActive: false});
   }
 
