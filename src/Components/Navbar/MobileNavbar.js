@@ -2,7 +2,20 @@
 // About: MobileNavbar.js
 // =============================================================================
 /*
-  MobileNavbar contains <MobileNavbar/>, a component that:
+  1) MobileNavbar contains <MobileNavbar/>, a component that:
+    - is used by <MobileLayout/> to enable page navigation on the website
+
+    <MobileNavbar/>'s Props:
+      - selectedPage : TEXT
+        -> the text ID of the currently selected tab/page on the website
+      - selectPage   : FUNCTION
+        -> lets the user switch to a different tab/page
+
+    <MobileNavbar/>'s Children:
+      - n/a
+
+    <MobileNavbar/>'s Parents:
+      - <MobileLayout/>
 */
 
 // Imports ---------------------------------------------------------------------

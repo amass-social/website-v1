@@ -2,13 +2,34 @@
 // About: Chat.js
 // =============================================================================
 /*
-  Chat contains <Chat/>, a component that:
+  1) Chat contains <Chat/>, a component that:
     - contains all the basic components for a conversation between multiple people
       -> shows the messages
       -> includes an input field (<ChatInput/>) for the user to input new messages
 
-  Chat also contains <ChatInput/>, which is responsible for:
+    <Chat/>'s Props:
+      - n/a for now, but will add later
+
+    <Chat/>'s Children:
+      - <ChatInput/>
+
+    <Chat/>'s Parents:
+      - <ChatPopup/>
+
+
+  2) Chat also contains <ChatInput/>, which is responsible for:
     - being the text input that the user types into when using <Chat/>
+    - combining a <textarea/> with emoji selection tools
+
+    <ChatInput/>'s Props:
+      - n/a for now
+
+    <ChatInput/>'s Children:
+      - <AdjustableTextArea/>
+      - <EmojiSelect/>
+
+    <ChatInput/>'s Parents:
+      - <Chat/>
 */
 
 // Imports ---------------------------------------------------------------------

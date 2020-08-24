@@ -2,10 +2,29 @@
 // About: AdjustableTextArea.js
 // =============================================================================
 /*
-  AdjustableTextArea is a component which:
+  1) AdjustableTextArea is a component which:
     - is used whenever a user needs to type in text that could include newlines
     - it starts off being the height of 1 line and grows taller as needed, with a max height given through props
     - the text value is passed in through props (along with a function to edit that text)
+
+    <AdjustableTextArea/>'s Props:
+      - text       : TEXT
+      - lineLimit  : INT
+        -> equal to the number of lines the <textarea/> can expand to. This is set to 6 by default.
+      - updateText : FUNCTION
+        -> this function gets called to update the text where it's being held in the parent state
+      - submitText : FUNCTION
+        -> this function gets run when the user hits enter (while not holding shift)
+
+      Note: this component can be called using a custom ref which doesn't actually appear in this code.
+        -> this allows a parent to call .focusOnTextArea() and .addSubstringToText() without worrying about props
+        -> this makes dealing with cursor locations in the <textarea/> much simpler.
+
+    <AdjustableTextArea/>'s Children:
+      - n/a
+
+    <AdjustableTextArea/>'s Parents:
+      - <ChatInput/>
 */
 
 // Imports ---------------------------------------------------------------------

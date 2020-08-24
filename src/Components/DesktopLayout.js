@@ -2,8 +2,30 @@
 // About: DesktopLayout.js
 // =============================================================================
 /*
-  DesktopLayout contains <DesktopLayout/>, a component that:
+  1) DesktopLayout contains <DesktopLayout/>, a component that:
     - is used by <App/> to render the desktop version of the site
+
+    <DesktopLayout/>'s Props:
+      - renderLandscape : BOOL
+        -> if true, content is rendered in the center of screen and there is padding to left/right
+        -> if false, renders <DesktopLayout/> with the sidebar all the way to the left of screen and content fills screen
+      - selectedPage    : TEXT
+        -> the text ID of the currently selected page. This is modified by the navigational <Sidebar/>
+      - selectPage      : FUNCTION
+        -> this function lets the user navigate to & select a new page to render. This is passed to <Sidebar/>
+      - selectedChatId  : TEXT
+        -> the text ID of the chat that is currently selected
+        -> if no chat is selected, this is an empty string ""
+      - selectChat      : FUNCTION
+        -> this function lets the user select a chat
+
+    <DesktopLayout/>'s Children:
+      - <Sidebar/>
+        -> navigational sidebar that sits on the left side of the window
+        -> contains navbar tabs and a list of chats
+
+    <DesktopLayout/>'s Parents:
+      - <App/>
 */
 
 // Imports ---------------------------------------------------------------------

@@ -2,8 +2,18 @@
 // About: EmojiSelect.js
 // =============================================================================
 /*
-  EmojiSelect contains <EmojiSelect/>, a component that:
+  1) EmojiSelect contains <EmojiSelect/>, a component that:
     - lets the user select an emoji
+
+    <EmojiSelect/>'s Props:
+      - selectEmoji : FUNCTION
+        -> takes the selected emoji and inserts it wherever needed in the parent
+
+    <EmojiSelect/>'s Children:
+      - n/a
+
+    <EmojiSelect/>'s Parents:
+      - <ChatInput/>
 */
 
 // Imports ---------------------------------------------------------------------

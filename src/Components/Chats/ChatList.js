@@ -2,24 +2,66 @@
 // About: ChatList.js
 // =============================================================================
 /*
-  ChatList contains <ChatList/>, a component that:
+  1) ChatList contains <ChatList/>, a component that:
     - is used to render a vertical list of chats (represented by <ChatTab/>)
     - these are interactive, so hovering over a <ChatTab/> will render a <ChatPopup/>
-    -   and clicking a <ChatTab/> will take the user to a <ChatPage/>
+        and clicking a <ChatTab/> will take the user to a <ChatPage/>
+    - In order to avoid difficult edge cases with popups, <ChatList/> maintains the state for which child is being hovered over
 
-  ChatList also contains <ChatTab/>, a component that:
+    <ChatList/>'s Props:
+      - chats          : LIST
+        -> a list of chat objects to render
+        -> these will be rendered as <ChatTab/>
+      - selectChat     : FUNCTION
+        -> lets the user select a chat to focus on
+      - selectedChatId : TEXT
+        -> the text ID of the currently selected chat, used while rendering props.chats
+
+    <ChatList/>'s Children:
+      - <ChatTab/>
+
+    <ChatList/>'s Parents:
+      - <Sidebar/>
+
+
+  2) ChatList also contains <ChatTab/>, a component that:
     - represents a single chat in the <ChatList/>
     - when the user hovers over a <ChatTab/>, it will render a <ChatPopup/> with additional details about the chat
     - when the user clicks a <ChatTab/>, it will select the chat page
 
-  ChatList also contains <ChatPopup/>, a component that:
+    <ChatTab/>'s Props:
+      - chatId     : TEXT
+      - title      : TEXT
+      - selected   : BOOL
+      - selectChat : FUNCTION
+      - hovered    : TEXT
+      - setHovered : FUNCTION
+
+    <ChatTab/>'s Children:
+      - <ChatPopup/>
+
+    <ChatTab/>'s Parents:
+      - <ChatList/>
+
+
+  3) ChatList also contains <ChatPopup/>, a component that:
     - shows at-a-glance information about a chat, including:
       -> the participants in the convo
       -> the original post that was shared that the conversation started from
       -> the recent messages in the chat
       -> the ability to send a message directly from the popup
     - This component is rendered by <ChatTab/>
+
+    <ChatPopup/>'s Props:
+      - n/a for now, but will add more later
+
+    <ChatPopup/>'s Children:
+      - <Chat/>
+
+    <ChatPopup/>'s Parents:
+      - <ChatTab/>
 */
+
 
 // Imports ---------------------------------------------------------------------
 

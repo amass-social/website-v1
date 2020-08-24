@@ -2,7 +2,17 @@
 // About: [name].js
 // =============================================================================
 /*
-  [name] contains <[name]/>, a component that:
+  1) [name] contains <[name]/>, a component that:
+    - ...
+
+    <[name]/>'s Props:
+      - n/a
+
+    <[name]/>'s Children:
+      - n/a
+
+    <[name]/>'s Parents:
+      - n/a
 */
 
 // Imports ---------------------------------------------------------------------

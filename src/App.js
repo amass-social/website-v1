@@ -2,7 +2,18 @@
 // About: App.js
 // =============================================================================
 /*
-  App.js contains <App/>, which is the root component of this website
+  1) App.js contains <App/>, which:
+    - serves as the root
+
+    <App/>'s Props:
+      - n/a because <App/> is the root.
+
+    <App/>'s Children:
+      - <DesktopLayout/>
+      - <MobileLayout/>
+
+    <App/>'s Parents:
+      - n/a
 */
 
 
