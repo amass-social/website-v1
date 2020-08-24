@@ -35,6 +35,7 @@ import './DesktopLayout.css';
 
 // components
 import Sidebar from './Navbar/Sidebar.js';
+import Feed from './Feed/Feed.js';
 
 
 // =============================================================================
@@ -42,6 +43,22 @@ import Sidebar from './Navbar/Sidebar.js';
 // =============================================================================
 
 class DesktopLayout extends React.Component {
+
+  displaySelectedPage = () => {
+    /**
+     * Display the page selected by the tab in <Sidebar/>.
+     */
+    switch (this.props.selectedPage) {
+      case 'home':      return <Feed/>;
+
+      /** @todo Add components for their respective pages here */
+      case 'library':
+      case 'friends':
+      case 'account':
+      default:          return <p>Page not found.</p>
+    }
+  }
+
   render() {
     return (
       <div id="DesktopLayout">
@@ -54,7 +71,9 @@ class DesktopLayout extends React.Component {
               selectChat     = {this.props.selectChat}
               />
           </div>
-          <div id="main-content-container"></div>
+          <div id="main-content-container">
+            {this.displaySelectedPage()}
+          </div>
         </div>
       </div>
     );
