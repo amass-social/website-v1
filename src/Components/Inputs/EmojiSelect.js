@@ -38,12 +38,17 @@ class EmojiSelect extends React.Component {
 
   constructor() {
     super();
+    this.searchInputRef = React.createRef(); // <- so that the search can be auto-focused on
     this.state = {
       selectSkinColorActive : false,
-      hoveredEmojiId        : ''
+      hoveredEmojiId        : '',
+      searchText            : ''
     };
   }
 
+  componentDidMount = () => {
+    this.searchInputRef.current.focus();
+  }
   // Input ---------------------------------------------------------------------
 
   onClick_selectSkinColor = () => {
@@ -102,6 +107,9 @@ class EmojiSelect extends React.Component {
   }
 
 
+  // The top bar of <EmojiSelect/> contains:
+  //  1) a search bar for filtering emojis by name
+  //  2) a row of categories that the user can click to jump to
   renderTopBar = () => {
     let categoriesToRender = [];
     for (let i = 0; i < 9; i++) {
@@ -112,7 +120,12 @@ class EmojiSelect extends React.Component {
     return (
       <div id="top-container">
         <div id="search-bar-container">
-          <input id="search-bar" placeholder="Search Emojis..."/>
+          <input
+            id="search-bar"
+            ref={this.searchInputRef}
+            placeholder="Search Emojis..."
+            value={this.state.searchText}
+            onChange={(e) => this.setState({'searchText': e.target.value})}/>
         </div>
         <div id="emoji-category-container">
           {categoriesToRender}
@@ -122,23 +135,32 @@ class EmojiSelect extends React.Component {
   }
 
 
+  // renders the emojis that match the current search constraints
+  // -> if the user hasn't added any search constraints, renders a list of all emojis (sorted by category)
   renderEmojis = () => {
+    let searchText = this.state.searchText.toLowerCase();
     let emojisToRender = [];
     for (let emojiId in DEFINITIONS) {
-      let emojiUnicode = DEFINITIONS[emojiId]['default']['emoji'];
-      let emojiRendered = RenderEmoji(emojiUnicode);
-      emojisToRender.push(
-        <p
-          id="emoji"
-          onMouseEnter={() => this.onMouseHoverEmoji(emojiId)}
-          onClick={() => this.props.selectEmoji(emojiUnicode)}>
-          {emojiRendered}
-        </p>
-      );
-      if (emojisToRender.length === 50) {
-        return emojisToRender;
+      if ('default' in DEFINITIONS[emojiId]) {
+        let emojiTitle = DEFINITIONS[emojiId]['default']['title'].toLowerCase();
+        if ((this.state.searchText === '') || (emojiTitle.indexOf(searchText) >= 0)) {
+          let emojiUnicode = DEFINITIONS[emojiId]['default']['emoji'];
+          let emojiRendered = RenderEmoji(emojiUnicode);
+          emojisToRender.push(
+            <p
+              id="emoji"
+              onMouseEnter={() => this.onMouseHoverEmoji(emojiId)}
+              onClick={() => this.props.selectEmoji(emojiUnicode)}>
+              {emojiRendered}
+            </p>
+          );
+        }
+      }
+      if (emojisToRender.length > 60) {
+        break;
       }
     }
+    return emojisToRender;
   }
 
   render() {
