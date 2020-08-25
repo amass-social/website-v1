@@ -22,6 +22,27 @@ import React from 'react';
 import './Feed.css';
 import Post from './Post.js'
 
+// Constants -------------------------------------------------------------------
+
+const YT_LINKS = [
+  'https://img.youtube.com/vi/BV2FdDmGiW0/hqdefault.jpg',
+  'https://img.youtube.com/vi/F2yI7fNd9fQ/hqdefault.jpg',
+  'https://img.youtube.com/vi/uLCXn445-eQ/hqdefault.jpg',
+  'https://img.youtube.com/vi/F2yI7fNd9fQ/hqdefault.jpg',
+]
+
+let POSTS = []
+for (let i = 0; i < YT_LINKS.length; ++i) {
+  POSTS.push(
+    <Post
+      title         = {'Video'}
+      datetimeSent  = {Date.now()}
+      link          = {YT_LINKS[i]}
+      tags          = {['@user', '#tag', '$group']}
+      messages      = {[]}
+    />
+  )
+}
 
 // =============================================================================
 // <Feed/>
@@ -31,8 +52,11 @@ class Feed extends React.Component {
   render() {
     return (
       <div id="Feed">
-        <p>Component: Feed</p>
-        <Post />
+        {
+          POSTS.map(element => {
+            return element;
+          })
+        }
       </div>
     );
   }
