@@ -1,0 +1,88 @@
+.post .main-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.post .main-content .header h2 {
+    display: inline;
+    margin-right: 5px;
+}
+
+.post .main-content .header p {
+    font-family: Helvetica, sans-serif;
+    font-size: .8rem;
+    display: inline;
+    color: #000;
+    opacity: .5;
+}
+
+.post .main-content .header {
+    align-self: flex-start;
+    margin-bottom: .4rem;
+}
+
+.post .main-content .preview {
+    width: calc(100% - .3rem);
+    /* height: 400px; */
+    background-color: #fff;
+    border: white .3rem solid;
+    border-radius: 1px;
+
+    overflow: hidden;
+}
+
+.post .main-content .preview .image {
+    width: 100%;
+    transform: translate(0, -5rem);
+}
+
+.post .main-content .interaction-bar {
+    width: 100%;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: .2rem;
+}
+
+.post .main-content .interaction-bar .favicon {
+    margin-right: .5rem;
+}
+
+.post .main-content .interaction-bar .tags {
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    padding-right: 1rem;
+}
+
+.post .main-content .interaction-bar .tags .tag {
+    margin-left: 1rem;
+    text-decoration: underline;
+    color: purple;
+    opacity: .7;
+}
+
+.post .main-content .interaction-bar .reactions {
+    height: 2.5rem;
+    /* width: 10%; */
+    background-color: #fff;
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: .2rem;
+    padding-right: .2rem;
+
+}
+
+.post .main-content .interaction-bar .reactions .reaction {
+    margin-left: .2rem;
+    margin-right: .2rem;
+    font-size: 1.2rem;
+}
