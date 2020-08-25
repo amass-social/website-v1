@@ -24,6 +24,7 @@
 import React from 'react';
 import './Post.css';
 import PostContent from './PostContent';
+import MessageList from '../Messages/MessageList.js';
 
 
 // =============================================================================
@@ -40,7 +41,7 @@ class Post extends React.Component {
           link         = {this.props.link}
           tags         = {this.props.tags}
         />
-        <div class="messages"></div>
+        <MessageList />
         <div class="reply-bar"></div>
       </div>
     );
