@@ -13,7 +13,7 @@
       @param {array(array)} messages
 
     <Post/>'s Children:
-      - n/a
+      - <PostContent/>
 
     <Post/>'s Parents:
       - <Feed/>
