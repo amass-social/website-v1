@@ -16,8 +16,8 @@
 
 .post .main-content .preview {
     width: calc(100% - .7rem);
-    background-color: #fff;
-    border: white .5rem solid;
+    background-color: var(--color-bg-1);
+    border: var(--color-bg-1) .5rem solid;
     border-radius: 1px;
 
     overflow: hidden;
@@ -59,14 +59,14 @@
 .post .main-content .interaction-bar .tags .tag {
     margin-left: 1rem;
     text-decoration: underline;
-    color: purple;
+    color: var(--color-link-1);
     opacity: .7;
 }
 
 .post .main-content .interaction-bar .reactions {
     height: 2.5rem;
     /* width: 10%; */
-    background-color: #fff;
+    background-color: var(--color-bg-1);
 
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;

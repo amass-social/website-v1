@@ -5,7 +5,7 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
-    color: #fff;
+    color: var(--color-text-1);
 
     margin-top: .5rem;
 }
@@ -45,9 +45,9 @@
 }
 
 .message-box.sent {
-    background: linear-gradient(352.36deg, #C852FF -101.85%, #DE7796 62.25%);
+    background: var(--gradient-message-sent);
 }
 
 .message-box.recieved {
-    background: linear-gradient(140.83deg, #C070FF 43.46%, #865BFF 108.38%);
+    background: var(--gradient-message-recieved);
 }
