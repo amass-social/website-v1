@@ -84,7 +84,7 @@ class Message extends React.Component {
     return (
       <div class="message">
         {
-          (this.props.sender === CURR_USER)
+          (this.format === 'sent')
             ? this.renderSentMessage()
             : this.renderRecievedMessage()
         }
