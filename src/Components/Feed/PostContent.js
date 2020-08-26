@@ -12,10 +12,11 @@
         * reactions
 
     <PostContent/>'s Props:
-      @param {string} title
-      @param {string} datetimeSent
-      @param {string} link
-      @param {array(string)} tags
+      @param {string} title The title of the post
+      @param {Date} datetimeSent The time the post was created
+      @param {string} link The link to the shared page
+      @param {string[]} tags A list of tags to display
+      @param {string[]} reactions A list of emojis users have reacted with
 
     <PostContent/>'s Children:
       - n/a
@@ -56,18 +57,20 @@ class PostContent extends React.Component {
   renderTags = () => {
     return (
       <div class="tags">
-        <a href="#" class="tag">@person</a>
-        <a href="#" class="tag">#tag</a>
+        {this.props.tags.map( tag => {
+          return <a href="#" class="tag">{tag}</a>
+        })}
       </div>
     )
   }
 
   renderReactions = () => {
+    console.log(this.props);
     return (
       <div class="reactions">
-        <div class="reaction">😀</div>
-        <div class="reaction">🤙</div>
-        <div class="reaction">🌊</div>
+        {this.props.reactions.map( reaction => {
+          return <span class="reaction">{reaction}</span>
+        })}
       </div>
     )
   }

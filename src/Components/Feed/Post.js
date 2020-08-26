@@ -25,6 +25,7 @@ import React from 'react';
 import './Post.css';
 import PostContent from './PostContent';
 import MessageList from '../Messages/MessageList.js';
+import AdjustableTextArea from '../Inputs/AdjustableTextArea.js';
 
 
 // =============================================================================
@@ -32,6 +33,13 @@ import MessageList from '../Messages/MessageList.js';
 // =============================================================================
 
 class Post extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      replyText: ''
+    }
+  }
+
   render() {
     return (
       <div class="post">
@@ -40,9 +48,18 @@ class Post extends React.Component {
           datetimeSent = {this.props.datetimeSent}
           link         = {this.props.link}
           tags         = {this.props.tags}
+          reactions    = {this.props.reactions}
+          messages     = {this.props.messages}
         />
         <MessageList />
-        <div class="reply-bar"></div>
+        <div class="reply-bar">
+          <AdjustableTextArea
+            ref        = {''}
+            text       = {this.state.replyText}
+            updateText = {(newText) => {this.setState({replyText: newText})}}
+            submitText = {''}
+          />
+        </div>
       </div>
     );
   }

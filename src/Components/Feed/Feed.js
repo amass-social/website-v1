@@ -29,7 +29,7 @@ const YT_LINKS = [
   'https://img.youtube.com/vi/F2yI7fNd9fQ/hqdefault.jpg',
   'https://img.youtube.com/vi/uLCXn445-eQ/hqdefault.jpg',
   'https://img.youtube.com/vi/F2yI7fNd9fQ/hqdefault.jpg',
-]
+];
 
 let POSTS = []
 for (let i = 0; i < YT_LINKS.length; ++i) {
@@ -39,10 +39,13 @@ for (let i = 0; i < YT_LINKS.length; ++i) {
       datetimeSent  = {Date.now()}
       link          = {YT_LINKS[i]}
       tags          = {['@user', '#tag', '$group']}
-      messages      = {[]}
+      reactions     = {['😀', '🤙', '🌊']}
+      messages      = {['a']}
     />
   )
 }
+
+console.log(POSTS);
 
 // =============================================================================
 // <Feed/>
@@ -53,8 +56,8 @@ class Feed extends React.Component {
     return (
       <div id="Feed">
         {
-          POSTS.map(element => {
-            return element;
+          POSTS.map(post => {
+            return post;
           })
         }
       </div>
