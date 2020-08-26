@@ -31,7 +31,7 @@ const YT_LINKS = [
   'https://live.staticflickr.com/65535/50272292716_f0d9f0e728_h.jpg',
   'https://img.youtube.com/vi/F2yI7fNd9fQ/hqdefault.jpg',
   'https://img.youtube.com/vi/uLCXn445-eQ/hqdefault.jpg',
-  'https://img.youtube.com/vi/F2yI7fNd9fQ/hqdefault.jpg',
+  'https://live.staticflickr.com/65535/50271352492_d59a51d83c_n.jpg',
 ];
 
 /**
