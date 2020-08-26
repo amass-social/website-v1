@@ -18,10 +18,12 @@
 .message-content.sent {
     margin-right: 1rem;
     margin-left: auto;
+    align-items: flex-end;
 }
 
 .message-content.recieved {
     margin-left: 1rem;
+    align-items: flex-start;
 }
 
 .timestamp.sent {
@@ -39,6 +41,7 @@
     padding: .6rem;
     border-radius: .3rem;
     text-align: left;
+    margin-bottom: .2rem;
 }
 
 .message-box.sent {
