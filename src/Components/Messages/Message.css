@@ -1,0 +1,56 @@
+/* <Message/> --------------------------------------------------------------- */
+
+.message {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: #fff;
+
+    margin-top: .5rem;
+}
+
+.message-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-content.sent {
+    margin-right: 1rem;
+    margin-left: auto;
+}
+
+.message-content.recieved {
+    margin-left: 1rem;
+}
+
+.timestamp {
+    font-size: .8rem;
+    color: #000;
+    opacity: .5;
+}
+
+.timestamp.sent {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.timestamp.recieved {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.message-box {
+    height: 75%;
+    padding: .6rem;
+    border-radius: .3rem;
+    text-align: left;
+}
+
+.message-box.sent {
+    background: linear-gradient(352.36deg, #C852FF -101.85%, #DE7796 62.25%);
+}
+
+.message-box.recieved {
+    background: linear-gradient(140.83deg, #C070FF 43.46%, #865BFF 108.38%);
+}
