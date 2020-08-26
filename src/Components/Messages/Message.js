@@ -22,6 +22,7 @@
 import React from 'react';
 import './Message.css';
 import ProfilePicture from '../User/ProfilePicture.js';
+import Timestamp from './Timestamp';
 
 // Constants -------------------------------------------------------------------
 
@@ -34,18 +35,23 @@ const CURR_USER = 'username';
 class Message extends React.Component {
 
   format = (this.props.sender === CURR_USER)
-    ? ' sent ' 
-    : ' recieved ';
+    ? 'sent' 
+    : 'recieved';
 
   renderMessageBox = () => {
     return (
-      <div class={'message-content' + this.format}>
-        <div class={'message-box' + this.format}>
+      <div class={'message-content ' + this.format}>
+        <div class={'message-box ' + this.format}>
           {this.props.text}
         </div>
-        <div class={'timestamp' + this.format}>
-          Sent at {this.props.datetimeSent} by {this.props.sender}
-        </div>
+        <Timestamp 
+          time={this.props.datetimeSent} 
+          sender={this.props.sender}
+          className={(this.format === 'sent')
+            ? 'align-right'
+            : 'align-left'
+          }
+        />
       </div>
     )
   }

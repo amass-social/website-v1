@@ -9,14 +9,6 @@
     margin-right: 5px;
 }
 
-.post .main-content .header p {
-    font-family: Helvetica, sans-serif;
-    font-size: .8rem;
-    display: inline;
-    color: #000;
-    opacity: .5;
-}
-
 .post .main-content .header {
     align-self: flex-start;
     margin-bottom: .4rem;

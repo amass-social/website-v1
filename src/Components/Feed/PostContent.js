@@ -28,6 +28,7 @@
 
 import React from 'react';
 import './PostContent.css';
+import Timestamp from '../Messages/Timestamp.js';
 
 
 // =============================================================================
@@ -39,7 +40,7 @@ class PostContent extends React.Component {
     return(
       <div class="header">
         <h2>{this.props.title}</h2>
-        <p>sent at {this.props.datetimeSent}</p>
+        <Timestamp time={new Date(1598310192966)} sender={'friend'} />
       </div>
     )
   }
