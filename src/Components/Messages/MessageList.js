@@ -37,12 +37,19 @@ class MessageList extends React.Component {
      */
     let messageComponents = [];
     for (let i = 0; i < messages.length; ++i) {
+      let lastMessage = {};
+      if (i > 0) lastMessage = messages[i-1];
       let currMessage = messages[i];
+
       messageComponents.push(
         <Message
           sender    = {currMessage.sender}
           text      = {currMessage.text}
           timestamp = {currMessage.timestamp}
+          displayProfilePicture = {(lastMessage.sender === currMessage.sender)
+            ? false
+            : true
+          }
         />
       )
     }

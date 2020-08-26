@@ -3,7 +3,6 @@
 .profile-picture {
     overflow: hidden;
     border-radius: 50%;
-    background-color: #000;
 
     /* Avoid resizing when a profile picture is in a flex container */
     flex-shrink: 0;

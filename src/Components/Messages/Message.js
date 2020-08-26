@@ -9,6 +9,8 @@
       @param {string} sender The username of the person sending the message
       @param {string} timestamp The time the message was sent at
       @param {string} text The content of the message
+      @param {boolean} displayProfilePicture Whether or not to display profile
+      picture
 
     <Message/>'s Children:
       - n/a
@@ -56,6 +58,19 @@ class Message extends React.Component {
     )
   }
 
+  renderProfilePicture = () => {
+    /**
+     * Display profile picture if directed to.
+     * If a profile picture shouldn't be displayed render an empty one to 
+     * maintain spacing of messages.
+     */
+    if (this.props.displayProfilePicture) {
+      return <ProfilePicture src='https://i.imgur.com/c1Tn08T.jpg'/>
+    } else {
+      return <ProfilePicture />
+    }
+  }
+
   renderSentMessage = () => {
     /**
      * Displays a message with all elements right aligned.
@@ -63,7 +78,7 @@ class Message extends React.Component {
     return (
       <>
         {this.renderMessageBox()}
-        <ProfilePicture src='https://i.imgur.com/c1Tn08T.jpg'/>
+        {this.renderProfilePicture()}
       </>
     )
   }
@@ -74,7 +89,7 @@ class Message extends React.Component {
      */
     return (
       <>
-        <ProfilePicture src='https://i.imgur.com/c1Tn08T.jpg'/>
+        {this.renderProfilePicture()}
         {this.renderMessageBox()}
       </>
     )
