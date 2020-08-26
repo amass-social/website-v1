@@ -15,18 +15,16 @@
 }
 
 .post .main-content .preview {
-    width: calc(100% - .3rem);
-    /* height: 400px; */
+    width: calc(100% - .7rem);
     background-color: #fff;
-    border: white .3rem solid;
+    border: white .5rem solid;
     border-radius: 1px;
 
     overflow: hidden;
 }
 
-.post .main-content .preview .image {
+.post .main-content .preview img {
     width: 100%;
-    transform: translate(0, -5rem);
 }
 
 .post .main-content .interaction-bar {
@@ -85,4 +83,12 @@
     margin-left: .2rem;
     margin-right: .2rem;
     font-size: 1.2rem;
+}
+
+.post .reply-bar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    margin-top: 1rem;
 }
