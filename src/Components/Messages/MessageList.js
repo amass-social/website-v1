@@ -1,12 +1,13 @@
 // =============================================================================
 // About: MessageList.js
 // =============================================================================
-/*
+/**
   1) MessageList contains <MessageList/>, a component that:
     - holds a list of messages for a post
 
     <MessageList/>'s Props:
-      - n/a
+      @param {object[]} messages An array of messages with properties: sender, 
+      text, and timestamp
 
     <MessageList/>'s Children:
       - <Message/>
@@ -21,57 +22,38 @@ import React from 'react';
 import './MessageList.css';
 import Message from './Message.js';
 
-// Constants -------------------------------------------------------------------
-const LOREM = `lorem ipsum dolor sit amet consectetur adipiscing elit Proin
-               metus elit, dapibus a odio et elementum suscipit sem`;
-const USERS = ['username', 'friend'];
-
-let generatePlaceholderMessage = () => {
-  /**
-   * Generates a message to use for testing Message appearance.
-   */
-  let dictionary = LOREM.split(' ');
-  let numberOfWords = Math.floor(Math.random() * 20) + 1
-
-  let message = ''
-  for (let i = 0; i < numberOfWords; ++i) {
-    let randomWord = Math.floor(Math.random() * dictionary.length);
-    message += dictionary[randomWord] + ' '
-  }
-
-  return message;
-}
-
-let MESSAGES = () => {
-  /**
-   * Generates a list of <Message/>s for testing.
-   */
-  let numberOfMessages = Math.floor(Math.random() * 5) + 1;
-  let user = USERS[1];  // first message always sent by friend
-
-  let messages = [];
-  for (let i = 0; i < numberOfMessages; ++i) {
-    messages.push(
-      <Message 
-          sender  = {user} 
-          text    = {generatePlaceholderMessage()}
-      />
-    )
-    user = USERS[Math.floor(Math.random() * 2)];
-  }
-
-  return messages;
-}
-
 // =============================================================================
 // <MessageList/>
 // =============================================================================
 
 class MessageList extends React.Component {
+  parseMessages = (messages) => {
+    /**
+     * Parses a list of messages.
+     * @param {object[]} messages A list of message objects
+     * @example
+     * // returns [<Message sender='user' text='hi' timestamp=Date(123456)/>
+     * parseMessages([{sender:'user', text: 'hi', timestamp:Date(123456)}])
+     */
+    let messageComponents = [];
+    for (let i = 0; i < messages.length; ++i) {
+      let currMessage = messages[i];
+      messageComponents.push(
+        <Message
+          sender    = {currMessage.sender}
+          text      = {currMessage.text}
+          timestamp = {currMessage.timestamp}
+        />
+      )
+    }
+
+    return messageComponents;
+  }
+
   render() {
     return (
       <div class="message-list">
-        {MESSAGES().map(message => {
+        {this.parseMessages(this.props.messages).map(message => {
           return message;
         })}
       </div>

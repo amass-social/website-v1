@@ -51,7 +51,7 @@ class Post extends React.Component {
           reactions    = {this.props.reactions}
           messages     = {this.props.messages}
         />
-        <MessageList />
+        <MessageList messages={this.props.messages} />
         <div class="reply-bar">
           <AdjustableTextArea
             ref        = {''}

@@ -7,7 +7,7 @@
 
     <Message/>'s Props:
       @param {string} sender The username of the person sending the message
-      @param {string} datatimeSent The time the message was sent at
+      @param {string} timestamp The time the message was sent at
       @param {string} text The content of the message
 
     <Message/>'s Children:
@@ -45,7 +45,7 @@ class Message extends React.Component {
           {this.props.text}
         </div>
         <Timestamp 
-          time={this.props.datetimeSent} 
+          time={this.props.timestamp} 
           sender={this.props.sender}
           className={(this.format === 'sent')
             ? 'align-right'
