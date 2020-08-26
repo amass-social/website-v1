@@ -49,6 +49,14 @@
 
 .post .main-content .interaction-bar .favicon {
     margin-right: .5rem;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 2px;
+}
+
+.post .main-content .interaction-bar .link {
+    font-size: 1rem;
+    opacity: .7;
 }
 
 .post .main-content .interaction-bar .tags {

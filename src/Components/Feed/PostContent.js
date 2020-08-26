@@ -52,15 +52,6 @@ class PostContent extends React.Component {
     )
   }
 
-  renderLink = () => {
-    return (
-      <>
-        <img class="favicon" src="http://youtube.com/favicon.ico" />
-        <div class="link">{this.props.link}</div>
-      </>
-    )
-  }
-
   renderTags = () => {
     return (
       <div class="tags">
@@ -83,7 +74,7 @@ class PostContent extends React.Component {
   renderInteractionBar = () => {
     return (
       <div class="interaction-bar">
-        {this.renderLink()}
+        <Link src={this.props.link}/>
         {this.renderTags()}
         {this.renderReactions()}
       </div>
@@ -98,6 +89,34 @@ class PostContent extends React.Component {
         {this.renderInteractionBar()}
       </div>
     );
+  }
+}
+
+
+// =============================================================================
+// <Link/>
+// =============================================================================
+
+class Link extends React.Component {
+
+  simplifyLink = (link) => {
+    let ret = link.split('/');
+    if (link[0] === 'h') {
+      return ret[2];
+    } else {
+      return ret[0];
+    }
+  }
+
+  simplifiedLink = this.simplifyLink(this.props.src);
+
+  render() {
+    return (
+      <>
+        <img class="favicon" src={'https://' + this.simplifiedLink + '/favicon.ico'} />
+        <div class="link">{this.simplifiedLink}</div>
+      </>
+    )
   }
 }
 
