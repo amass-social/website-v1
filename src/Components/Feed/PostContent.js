@@ -100,22 +100,47 @@ class PostContent extends React.Component {
 
 class Link extends React.Component {
 
-  simplifyLink = (link) => {
-    let ret = link.split('/');
-    if (link[0] === 'h') {
-      return ret[2];
-    } else {
-      return ret[0];
-    }
+  excludeSubdomain = (basename) => {
+    /**
+     * Removes the subdomain from a basename url.
+     * @param {string} basename A basename url like 'img.youtube.com'
+     * @example
+     * // returns 'youtube.com'
+     * excludeSubdomain('img.youtube.com');
+     */
+    let l = basename.split('.');
+    if (l.length === 2) return basename;
+
+    let [_, domain, extension] = l;
+    return domain + '.' + extension;
   }
 
-  simplifiedLink = this.simplifyLink(this.props.src);
+  getBasename = (link) => {
+    /**
+     * Simplifies a link down to it's basename.
+     * @param {string} link A domain name like 'http{s}://{www.}something.com'
+     * @example
+     * // returns 'youtube.com'
+     * getBasename('http://img.youtube.com/vi/1234567/hqdefault.jpg')
+     */
+    let splitLink = link.split('/');
+    let basename = '';
+    if (splitLink[0].includes('http')) {
+      // splitLink[1] will be empty because we split 'http://' by '/'
+      basename = splitLink[2];
+    } else {
+      basename = splitLink[0];
+    }
+
+    return this.excludeSubdomain(basename);
+  }
 
   render() {
+    let basename = this.getBasename(this.props.src);
     return (
       <>
-        <img class="favicon" src={'https://' + this.simplifiedLink + '/favicon.ico'} />
-        <div class="link">{this.simplifiedLink}</div>
+        <img class="favicon" src={'https://' + basename + '/favicon.ico'} />
+        <div class="link">{basename}</div>
       </>
     )
   }
