@@ -122,7 +122,7 @@ class Feed extends React.Component {
 
   render() {
     return (
-      <div id="Feed" ref={this.scrollContext}>
+      <div id="Feed" ref={this.feed}>
         {
           POSTS.map(post => {
             return post;
