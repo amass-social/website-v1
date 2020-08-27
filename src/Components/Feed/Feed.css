@@ -1,0 +1,18 @@
+/* <Feed/> ------------------------------------------------------------------ */
+
+#Feed {
+    /* Sizing/Layout */
+    width: 100%;
+    height: calc(100% - 3rem);
+    padding-top: 3rem;
+    overflow-y: scroll;
+
+    /* Appearance */
+    background-color: var(--color-bg-3);
+
+    /* Flex */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}

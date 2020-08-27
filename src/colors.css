@@ -17,10 +17,14 @@
 
   /* Text colors */
   --color-text-1: white;
+  --color-text-2: black;
+  --color-link-1: #526FFF;
 
   /* Gradients */
   --gradient-1: linear-gradient(141deg, #526FFF 0%, #767BF0 51%, #8377DE 75%);
   --color-gradient-1: #526FFF;
+  --gradient-message-recieved: linear-gradient(140.83deg, #C070FF 43.46%, #865BFF 108.38%);
+  --gradient-message-sent: linear-gradient(352.36deg, #C852FF -101.85%, #DE7796 62.25%);
 
   /* shadow boxes */
   --box-shadow-1: 4px 4px 4px rgba(0, 0, 0, 0.25);

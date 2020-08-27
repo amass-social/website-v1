@@ -1,0 +1,53 @@
+/* <Message/> --------------------------------------------------------------- */
+
+.message {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--color-text-1);
+
+    margin-top: .5rem;
+}
+
+.message-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-content.sent {
+    margin-right: 1rem;
+    margin-left: auto;
+    align-items: flex-end;
+}
+
+.message-content.recieved {
+    margin-left: 1rem;
+    align-items: flex-start;
+}
+
+.timestamp.sent {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.timestamp.recieved {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.message-box {
+    height: 75%;
+    padding: .6rem;
+    border-radius: .3rem;
+    text-align: left;
+    margin-bottom: .2rem;
+}
+
+.message-box.sent {
+    background: var(--gradient-message-sent);
+}
+
+.message-box.recieved {
+    background: var(--gradient-message-recieved);
+}
