@@ -46,7 +46,7 @@ class ProfilePicture extends React.Component {
         class="profile-picture"
         style={this.styling}
       >
-        <img src={this.props.src} />
+        <img src={this.props.src} alt=''/>
       </div>
     );
   }

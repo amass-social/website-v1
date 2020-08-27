@@ -49,7 +49,7 @@ class PostContent extends React.Component {
   renderContent = () => {
     return (
       <div class="preview">
-        <img src={this.props.link} />
+        <img src={this.props.link} alt=''/>
       </div>
     )
   }
@@ -58,14 +58,13 @@ class PostContent extends React.Component {
     return (
       <div class="tags">
         {this.props.tags.map( tag => {
-          return <a href="#" class="tag">{tag}</a>
+          return <a href="/" class="tag">{tag}</a>
         })}
       </div>
     )
   }
 
   renderReactions = () => {
-    console.log(this.props);
     return (
       <div class="reactions">
         {this.props.reactions.map( reaction => {
@@ -114,7 +113,7 @@ class Link extends React.Component {
     let l = basename.split('.');
     if (l.length === 2) return basename;
 
-    let [_, domain, extension] = l;
+    let [domain, extension] = l.slice(1);
     return domain + '.' + extension;
   }
 
@@ -142,7 +141,7 @@ class Link extends React.Component {
     let basename = this.getBasename(this.props.src);
     return (
       <>
-        <img class="favicon" src={'https://' + basename + '/favicon.ico'} />
+        <img class="favicon" src={'https://' + basename + '/favicon.ico'} alt=''/>
         <div class="link">{basename}</div>
       </>
     )

@@ -70,7 +70,6 @@ class Timestamp extends React.Component {
      * Timestamp to display.
      * @todo Add logic for months and years
      */
-    console.log(Date.now());
     let deltaTime = Date.now() - this.props.time;
     let newTimeString = 'some time ago';
 
