@@ -15,6 +15,8 @@
         -> this function gets called to update the text where it's being held in the parent state
       - submitText : FUNCTION
         -> this function gets run when the user hits enter (while not holding shift)
+      - preventAutofocus: BOOLEAN
+        -> prevents autofocus behavior for textboxes that dont need it
 
       Note: this component can be called using a custom ref which doesn't actually appear in this code.
         -> this allows a parent to call .focusOnTextArea() and .addSubstringToText() without worrying about props
@@ -116,6 +118,7 @@ class AdjustableTextArea extends React.Component {
 
   // sets the focus to textarea
   focusOnTextArea = () => {
+    if (this.props.preventAutofocus) return;  // prevent autofocus for text inputs that dont require it
     this.textAreaRef.current.focus();
   }
 

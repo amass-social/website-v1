@@ -13,7 +13,7 @@
       - <Post/>
 
     <Feed/>'s Parents:
-      - n/a
+      - <DesktopLayout/>
 */
 
 // Imports ---------------------------------------------------------------------
@@ -101,9 +101,28 @@ for (let i = 0; i < YT_LINKS.length; ++i) {
 // =============================================================================
 
 class Feed extends React.Component {
+  constructor() {
+    super();
+    this.feed = React.createRef();
+  }
+  
+  componentDidMount() {
+    this.scrollViewTopTo(0)
+  }
+
+  scrollViewTopTo = (position) => {
+    /**
+     * Sets the position of the top edge of the feed to be at a position from the 
+     * top in pixels.
+     * @param {number} position A number that specifies the distance from the top
+     * of the screen in pixels
+     */
+    this.feed.current.scrollTop = position;
+  }
+
   render() {
     return (
-      <div id="Feed">
+      <div id="Feed" ref={this.scrollContext}>
         {
           POSTS.map(post => {
             return post;

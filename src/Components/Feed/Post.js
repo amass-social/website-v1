@@ -54,10 +54,11 @@ class Post extends React.Component {
         <MessageList messages={this.props.messages} />
         <div class="reply-bar">
           <AdjustableTextArea
-            ref        = {''}
-            text       = {this.state.replyText}
-            updateText = {(newText) => {this.setState({replyText: newText})}}
-            submitText = {''}
+            ref               = {''}
+            text              = {this.state.replyText}
+            updateText        = {(newText) => {this.setState({replyText: newText})}}
+            submitText        = {''}
+            preventAutofocus  = {true}
           />
         </div>
       </div>
