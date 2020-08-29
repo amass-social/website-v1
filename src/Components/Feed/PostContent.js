@@ -101,6 +101,13 @@ class PostContent extends React.Component {
 // =============================================================================
 
 class Link extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      basename: this.getBasename(this.props.src),
+      faviconSource: this.toFaviconUrl(this.getBasename(this.props.src))
+    }
+  }
 
   excludeSubdomain = (basename) => {
     /**
@@ -134,15 +141,36 @@ class Link extends React.Component {
       basename = splitLink[0];
     }
 
-    return this.excludeSubdomain(basename);
+    return basename;
+  }
+
+  handleFaviconError = () => {
+    /**
+     * If a favicon isn't found at the subdomain url, check the base url.
+     * For example, if a favicon isn't found for img.youtube.com fallback to youtube.com.
+     */
+    let newSource = this.toFaviconUrl(this.excludeSubdomain(this.state.basename))
+    this.setState({faviconSource: newSource})
+  }
+
+  toFaviconUrl = (basename) => {
+    /**
+     * Prepends 'https' to the basename so our site knows its and outside link
+     * and appends directory where favicon normally lives.
+     */
+    return 'https://' + basename + '/favicon.ico'
   }
 
   render() {
-    let basename = this.getBasename(this.props.src);
     return (
       <>
-        <img class="favicon" src={'https://' + basename + '/favicon.ico'} alt=''/>
-        <div class="link">{basename}</div>
+        <img 
+          onError={() =>this.handleFaviconError} 
+          class="favicon" 
+          src={this.state.faviconSource} 
+          alt=''
+        />
+        <div class="link">{this.state.basename}</div>
       </>
     )
   }
