@@ -3,7 +3,7 @@
 // =============================================================================
 /**
   1) Reactions contains <Reactions/>, a component that:
-    - ...
+    - handles user's reactions to posts.
 
     <Reactions/>'s Props:
       @param {string[]} reactions
@@ -34,7 +34,11 @@ class Reactions extends React.Component {
     super(props);
     this.state = {
       frequencies: {},
-      emojiSelectIsShowing: false
+      emojiSelectIsShowing: false,
+      emojiWindowX: 0,
+      emojiWindowY: 0,
+      emojiWindowWidth: 300,
+      emojiWindowHeight: 400
     }
   }
 
@@ -43,6 +47,12 @@ class Reactions extends React.Component {
   }
 
   updateFrequencyList = () => {
+    /**
+     * Creates/Updates a frequency list of all the reactions for a post.
+     * @example
+     * // returns {🙃: 3}
+     * updateFrequencyList([🙃, 🙃, 🙃])
+     */
     let tempFreq = {};
     for (let i = 0; i < this.props.reactions.length; ++i) {
       if (this.props.reactions[i] in tempFreq) {
@@ -55,23 +65,94 @@ class Reactions extends React.Component {
     this.setState({frequencies: tempFreq})
   }
 
+  toggleEmojiSelect = () => {
+    /**
+     * Toggles if the emoji select window should be shown.
+     */
+    this.setState({emojiSelectIsShowing: !this.state.emojiSelectIsShowing});
+  }
+
+  showEmojiSelect = (x, y) => {
+    /**
+     * Shows the emoji select window at the position where the button was clicked.
+     * @param {number} x The x position of the mouse click in pixels
+     * @param {number} y The y position of the mouse click in pixels
+     */
+    this.toggleEmojiSelect();
+    this.setState({
+      emojiWindowX: x,
+      emojiWindowY: y
+    });
+  }
+
+  addReaction = (emoji) => {
+    /**
+     * Adds an emoji to the list of reactions.
+     * @param {string} emoji The emoji character to add to the list of reactions
+     */
+    let temp = this.state.frequencies;
+    if (emoji in this.state.frequencies) {
+      temp[emoji]++;
+    } else {
+      temp[emoji] = 1;
+    }
+
+    this.setState({frequencies: temp});
+  }
+
   renderEmojiSelect = () => {
     if (this.state.emojiSelectIsShowing) {
       return (
-        <EmojiSelect />
+        <>
+          <div 
+            id="emoji-select-backdrop" 
+            onMouseLeave={(e) => e.stopPropagation()} 
+            onClick={this.toggleEmojiSelect}>
+          </div>
+
+          <div 
+            id="emoji-select-container"
+            style={  
+            /**
+             * Display the emoji window at the mouse click pos of the emoji
+             * toggle button
+             * @see showEmojiSelect
+             */
+            {
+              width: this.state.emojiWindowWidth,
+              height: this.state.emojiWindowHeight,
+              top: this.state.emojiWindowY - this.state.emojiWindowHeight,
+              left: this.state.emojiWindowX - this.state.emojiWindowWidth
+            }}  
+          >
+            <EmojiSelect selectEmoji={emoji => this.addReaction(emoji)}/>
+          </div>
+      </>
       )
     }
-  }
-
-  showEmojiSelect = () => {
-    this.setState({emojiSelectIsShowing: true});
   }
 
   render() {
     return (
       <div class="reactions">
+        {Object.keys(this.state.frequencies).map( emoji => {
+          return (
+            <Reaction 
+              emoji           = {emoji} 
+              count           = {this.state.frequencies[emoji]}
+              incrementCount  = {() => this.addReaction(emoji)}
+            />
+          )
+        })}
+
         {this.renderEmojiSelect()}
-        <input type='image' src={ADD_EMOJI_ICON} height='30px' onClick={(e) => this.showEmojiSelect()}/>
+
+        <input
+          class='emoji-select-button'
+          type='image' 
+          src={ADD_EMOJI_ICON}  
+          onClick={(e) => this.showEmojiSelect(e.clientX, e.clientY)}
+        />
       </div>
     );
   }
@@ -85,8 +166,9 @@ class Reactions extends React.Component {
 class Reaction extends React.Component {
   render() {
     return (
-      <div id="Reaction">
-        <span class="reaction">{}</span>
+      <div id='Reaction' onClick={() => this.props.incrementCount()}>
+        <span class='emoji'>{this.props.emoji}</span>
+        <div class='counter'>{this.props.count}</div>
       </div>
     );
   }
