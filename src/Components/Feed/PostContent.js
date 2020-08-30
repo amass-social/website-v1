@@ -30,6 +30,7 @@
 import React from 'react';
 import './PostContent.css';
 import Timestamp from '../Messages/Timestamp.js';
+import Reactions from './Reactions.js';
 
 
 // =============================================================================
@@ -66,11 +67,8 @@ class PostContent extends React.Component {
 
   renderReactions = () => {
     return (
-      <div class="reactions">
-        {this.props.reactions.map( reaction => {
-          return <span class="reaction">{reaction}</span>
-        })}
-      </div>
+
+      <Reactions reactions={this.props.reactions}/>
     )
   }
 

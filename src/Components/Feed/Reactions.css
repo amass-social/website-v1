@@ -1,0 +1,84 @@
+/* <Reactions/> ------------------------------------------------------------- */
+
+.reactions {
+    height: 2.5rem;
+    background-color: var(--color-bg-1);
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: .2rem;
+    padding-right: .2rem;
+}
+
+/* Emoji Select */
+
+.reactions #emoji-select-container {
+    position: absolute;
+    width: 400px;
+    height: 600px;
+    z-index: 900;
+}
+
+.reactions #emoji-select-backdrop {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: black;
+    opacity: 0.2;
+    z-index: 9;
+}
+
+.reactions .emoji-select-button {
+    height: 21px;
+    width: 21px;
+    margin-left: .2rem;
+    margin-right: .3rem;
+    opacity: 1;
+}
+
+.reactions .emoji-select-button:hover {
+    transition: opacity .1s;
+    opacity: .7;
+}
+
+/* <Reaction/> ------------------------------------------------------------- */
+
+#Reaction {
+    position: relative;
+    height: 40px;
+    width: 35px;
+    user-select: none;
+}
+
+#Reaction :hover {
+    cursor: pointer;
+}
+
+#Reaction .emoji {
+    position: absolute;
+    margin-left: .2rem;
+    margin-right: .2rem;
+    font-size: 1.2rem;
+    bottom: 5px;
+    left: 2px;
+}
+
+#Reaction .counter {
+    position: absolute;
+    width: fit-content;
+    font-size: 10px;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    background-color: var(--color-link-1);
+    border-radius: 5px;
+    color: var(--color-text-1);
+    padding:2px 6px;
+    opacity: .7;
+}

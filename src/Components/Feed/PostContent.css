@@ -64,28 +64,6 @@
     opacity: .7;
 }
 
-.post .main-content .interaction-bar .reactions {
-    height: 2.5rem;
-    /* width: 10%; */
-    background-color: var(--color-bg-1);
-
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding-left: .2rem;
-    padding-right: .2rem;
-
-}
-
-.post .main-content .interaction-bar .reactions .reaction {
-    margin-left: .2rem;
-    margin-right: .2rem;
-    font-size: 1.2rem;
-}
-
 .post .reply-bar {
     width: 100%;
     display: flex;
