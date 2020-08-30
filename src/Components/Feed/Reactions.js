@@ -152,6 +152,7 @@ class Reactions extends React.Component {
           type='image' 
           src={ADD_EMOJI_ICON}  
           onClick={(e) => this.showEmojiSelect(e.clientX, e.clientY)}
+          alt=''
         />
       </div>
     );
