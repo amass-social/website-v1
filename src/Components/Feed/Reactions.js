@@ -85,6 +85,11 @@ class Reactions extends React.Component {
     });
   }
 
+  handleSelectEmoji = (emoji) => {
+    this.addReaction(emoji);
+    this.toggleEmojiSelect();
+  }
+
   addReaction = (emoji) => {
     /**
      * Adds an emoji to the list of reactions.
@@ -125,7 +130,7 @@ class Reactions extends React.Component {
               left: this.state.emojiWindowX - this.state.emojiWindowWidth
             }}  
           >
-            <EmojiSelect selectEmoji={emoji => this.addReaction(emoji)}/>
+            <EmojiSelect selectEmoji={emoji => this.handleSelectEmoji(emoji)}/>
           </div>
       </>
       )
