@@ -49,9 +49,11 @@ class Post extends React.Component {
           link         = {this.props.link}
           tags         = {this.props.tags}
           reactions    = {this.props.reactions}
-          messages     = {this.props.messages}
         />
-        <MessageList messages={this.props.messages} />
+        <MessageList 
+          messages                = {this.props.messages} 
+          displayProfilePictures  = {true}
+        />
         <div class="reply-bar">
           <AdjustableTextArea
             ref               = {''}
