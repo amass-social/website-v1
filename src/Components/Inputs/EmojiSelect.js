@@ -86,8 +86,6 @@ class EmojiSelect extends React.Component {
     let offsetHeight = this.emojiScrollBox.current.offsetHeight;
     let contentHeight = scrollHeight - offsetHeight;
 
-    console.log(scrollTop, scrollHeight, offsetHeight, contentHeight);
-
     if (contentHeight <= scrollTop) {  // Box is scrolled to the bottom
       this.emojiScrollBox.current.scrollTop = contentHeight - 1;
     } else if (scrollTop === 0) {  // Box is scrolled to the top

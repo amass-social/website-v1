@@ -73,8 +73,6 @@ class MessageList extends React.Component {
       }
     }
 
-    console.log(messageGroups)
-    console.log(messages)
     // Handle end edge case
     if (currGroup.length !== 0) messageGroups.push(currGroup);
 
@@ -108,7 +106,6 @@ export default MessageList;
 class MessageGroup extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props.messages)
     this.format = (props.messages[0].sender === LOGGED_IN_USER)
       ? 'sent'
       : 'recieved'
