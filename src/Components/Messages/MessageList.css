@@ -5,3 +5,39 @@
     display: flex;
     flex-direction: column;
 }
+
+/* <MessageGroup/> ---------------------------------------------------------- */
+
+/* General Styling */
+
+.message-group {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+}
+
+/* Sent Message */
+
+.message-group.sent {
+    justify-content: flex-end;
+}
+
+.message-group.sent .messages.sent {
+    align-items: flex-end;
+    margin-right: .5rem;
+ }
+
+ /* Recieved Message */
+
+.message-group.recieved .messages.recieved {
+    align-items: flex-start;
+    margin-left: .5rem;
+}
+
