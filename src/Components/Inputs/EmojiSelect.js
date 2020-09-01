@@ -49,6 +49,16 @@ class EmojiSelect extends React.Component {
 
   componentDidMount = () => {
     this.searchInputRef.current.focus();
+
+
+    /* Scrolling */
+    /**
+     * Initialize scrollTop so that when the container is first loaded it
+     * will detect a scroll event. If the scrollTop was set to 0 and the
+     * container was scolled up, it would not detect a scroll event but still
+     * scroll background containers.
+     */
+    this.emojiScrollBox.current.scrollTop = 1;
     this.emojiScrollBox.current.addEventListener('scroll',
       this.preventOutsideScrolling,
       false
@@ -75,6 +85,8 @@ class EmojiSelect extends React.Component {
     let scrollHeight = this.emojiScrollBox.current.scrollHeight;
     let offsetHeight = this.emojiScrollBox.current.offsetHeight;
     let contentHeight = scrollHeight - offsetHeight;
+
+    console.log(scrollTop, scrollHeight, offsetHeight, contentHeight);
 
     if (contentHeight <= scrollTop) {  // Box is scrolled to the bottom
       this.emojiScrollBox.current.scrollTop = contentHeight - 1;
