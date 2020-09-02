@@ -66,7 +66,10 @@ class Post extends React.Component {
           displayProfilePictures  = {true}
         />
         <div class="reply-bar">
-          <ChatInput onSubmit={this.sendNewMessage} />
+          <ChatInput 
+            onSubmit          = {this.sendNewMessage} 
+            preventAutofocus  = {true}
+          />
         </div>
       </div>
     );
