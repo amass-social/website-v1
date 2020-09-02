@@ -14,6 +14,8 @@
 
     <Post/>'s Children:
       - <PostContent/>
+      - <Messages/>
+      - <ChatInput/>
 
     <Post/>'s Parents:
       - <Feed/>
@@ -22,10 +24,12 @@
 // Imports ---------------------------------------------------------------------
 
 import React from 'react';
+
+// Components
 import './Post.css';
 import PostContent from './PostContent';
 import MessageList from '../Messages/MessageList.js';
-import AdjustableTextArea from '../Inputs/AdjustableTextArea.js';
+import ChatInput   from '../Inputs/ChatInput.js';
 
 
 // =============================================================================
@@ -55,13 +59,7 @@ class Post extends React.Component {
           displayProfilePictures  = {true}
         />
         <div class="reply-bar">
-          <AdjustableTextArea
-            ref               = {''}
-            text              = {this.state.replyText}
-            updateText        = {(newText) => {this.setState({replyText: newText})}}
-            submitText        = {''}
-            preventAutofocus  = {true}
-          />
+          <ChatInput />
         </div>
       </div>
     );
