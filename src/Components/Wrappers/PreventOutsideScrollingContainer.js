@@ -6,8 +6,9 @@
     - Stops other components from scrolling when the top or bottom of the container is reached
 
     <PreventOutsideScrollingContainer/>'s Props:
-      @param {string} id        The id of the container
-      @param {string} className The className of the container
+      @param {string}     id        (optional) The id of the container
+      @param {string}     className (optional) The className of the container
+      @param {React.Ref}  ref       (optional) Pointer to assign div reference to
 
 */
 
@@ -74,7 +75,7 @@ class PreventOutsideScrollingContainer extends React.Component {
       <div 
         id        = {this.props.id || ''} 
         className = {this.props.className || ''}
-        ref       = {this.containerReference}
+        ref       = {this.containerReference || ''}
       >
         {this.props.children}
       </div>
