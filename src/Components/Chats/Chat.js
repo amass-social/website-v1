@@ -26,6 +26,7 @@ import './Chat.css';
 // components
 import ChatInput from '../Inputs/ChatInput.js';
 import MessageList from '../Messages/MessageList.js';
+import PreventOutsideScrollingContainer from '../Wrappers/PreventOutsideScrollingContainer';
 
 // =============================================================================
 // <Chat/>
@@ -37,8 +38,12 @@ class Chat extends React.Component {
     this.messageContainer = React.createRef(); // For scrolling to bottom
   }
 
+  componentDidMount() {
+    this.scrollToBottomOfMessages();
+  }
+
   componentDidUpdate() {
-    this.scrollToBottomOfMessages()
+    this.scrollToBottomOfMessages();
   }
 
   scrollToBottomOfMessages = () => {
@@ -48,11 +53,14 @@ class Chat extends React.Component {
   render() {
     return (
       <div id="Chat">
-        <div id="messages-container" ref={this.messageContainer}>
+        <PreventOutsideScrollingContainer 
+        id="messages-container" 
+        containerRef={this.messageContainer}
+      >
             <MessageList 
               messages={this.props.messages}
             />
-        </div>
+        </PreventOutsideScrollingContainer>
         <div id="chat-input-container">
           <ChatInput onSubmit={text => this.props.onSendMessage(text)}/>
         </div>
