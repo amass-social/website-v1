@@ -104,7 +104,7 @@ class ChatInput extends React.Component {
               text              = {this.state.text}
               updateText        = {(newText) => {this.setState({text: newText})}}
               submitText        = {this.sendText}
-              preventAutofocus  = {true}
+              preventAutofocus  = {this.props.preventAutofocus}
               />
           </div>
           {(this.state.text.length === 0 && false) && <div id="attachments-button"></div>}
