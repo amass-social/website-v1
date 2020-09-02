@@ -38,8 +38,12 @@ class Chat extends React.Component {
     this.messageContainer = React.createRef(); // For scrolling to bottom
   }
 
+  componentDidMount() {
+    this.scrollToBottomOfMessages();
+  }
+
   componentDidUpdate() {
-    this.scrollToBottomOfMessages()
+    this.scrollToBottomOfMessages();
   }
 
   scrollToBottomOfMessages = () => {
@@ -50,9 +54,9 @@ class Chat extends React.Component {
     return (
       <div id="Chat">
         <PreventOutsideScrollingContainer 
-          id="messages-container" 
-          ref={this.messageContainer}
-        >
+        id="messages-container" 
+        containerRef={this.messageContainer}
+      >
             <MessageList 
               messages={this.props.messages}
             />
