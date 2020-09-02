@@ -32,7 +32,6 @@
   #ChatInput #emojis-button {
     font-size: 30px;
     margin-right: 10px;
-    z-index: 110;
     cursor: pointer;
     margin-bottom: 0px;
   }

@@ -90,6 +90,9 @@ class ChatInput extends React.Component {
 
 
   render() {
+    // Display the emoji button on top of the transparent backdrop
+    let zIndexOfEmojiButton = this.state.emojiSelectActive? 110: 0;
+
     let renderEmojiButtonText = (this.state.emojiSelectActive) ? '😀' : '🙂';
     return (
       <div id="ChatInput">
@@ -103,7 +106,11 @@ class ChatInput extends React.Component {
               />
           </div>
           {(this.state.text.length === 0 && false) && <div id="attachments-button"></div>}
-          <div id="emojis-button" onClick={this.onClick_toggleEmojiSelect}>{RenderEmoji(renderEmojiButtonText)}</div>
+          <div 
+            id="emojis-button"
+            style={{zIndex: zIndexOfEmojiButton}}
+            onClick={this.onClick_toggleEmojiSelect}>{RenderEmoji(renderEmojiButtonText)}
+          </div>
           {this.renderEmojiSelect()}
         </div>
       </div>
