@@ -6,9 +6,9 @@
     - Stops other components from scrolling when the top or bottom of the container is reached
 
     <PreventOutsideScrollingContainer/>'s Props:
-      @param {string}     id        (optional) The id of the container
-      @param {string}     className (optional) The className of the container
-      @param {React.Ref}  ref       (optional) Pointer to assign div reference to
+      @param {string}     id            (optional) The id of the container
+      @param {string}     className     (optional) The className of the container
+      @param {React.Ref}  containerRef  (optional) Pointer to assign div reference to
 
 */
 
@@ -22,9 +22,9 @@ import React from 'react';
 // =============================================================================
 
 class PreventOutsideScrollingContainer extends React.Component {
-  constructor() {
-    super();
-    this.containerReference = React.createRef();
+  constructor(props) {
+    super(props);
+    this.containerReference = this.props.containerRef || React.createRef();
   }
 
   componentDidMount = () => {
@@ -34,7 +34,7 @@ class PreventOutsideScrollingContainer extends React.Component {
      * container was scolled up, it would not detect a scroll event but still
      * scroll background containers.
      */
-    this.containerReference.current.scrollTop = 1;
+    this.setScrollPosition(1);
     this.containerReference.current.addEventListener('scroll',
       this.preventOutsideScrolling,
       false
@@ -63,11 +63,15 @@ class PreventOutsideScrollingContainer extends React.Component {
     let contentHeight = scrollHeight - offsetHeight;
 
     if (contentHeight <= scrollTop) {  // Box is scrolled to the bottom
-      this.containerReference.current.scrollTop = contentHeight - 1;
+      this.setScrollPosition(contentHeight - 1);
     } else if (scrollTop === 0) {  // Box is scrolled to the top
-      this.containerReference.current.scrollTop = 1;
+      this.setScrollPosition(1);
     }
 
+  }
+
+  setScrollPosition = (position) => {
+    this.containerReference.current.scrollTop = position;
   }
 
   render() {
