@@ -1,0 +1,70 @@
+/* <ChatInput/> ------------------------------------------------------------- */
+
+#ChatInput {
+    width: 100%;
+    padding-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #ChatInput #text-input-row {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    min-height: 30px;
+  }
+  
+  #ChatInput #text-input-row #text-area-container {
+    flex-grow: 1;
+    margin: 0px 10px;
+    margin-bottom: 2px;
+  }
+  
+  
+  #ChatInput #text-input-row #attachments-button {
+    height: 30px;
+    width: 30px;
+    margin: 0px 5px;
+    background-color: var(--color-bg-3);
+  }
+  
+  
+  #ChatInput #emojis-button {
+    font-size: 30px;
+    margin-right: 10px;
+    z-index: 110;
+    cursor: pointer;
+    margin-bottom: 0px;
+  }
+  
+  
+  #ChatInput #emoji-select-anchor {
+    display: none;
+    width: 1px;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+  }
+  
+  
+  #ChatInput  #emoji-select-anchor #emoji-select-backdrop {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: black;
+    opacity: 0.2;
+    z-index: 9;
+  }
+  
+  #ChatInput  #emoji-select-anchor #emoji-select-container {
+    height: 450px;
+    width: 300px;
+    position: absolute;
+    bottom: 40px;
+    z-index: 10;
+    right: 11px;
+  }
+  
