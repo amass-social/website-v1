@@ -8,6 +8,7 @@
 
     <ChatInput/>'s Props:
       @param {function} onSubmit Function to call after text is submitted
+      @param {boolean}  preventAutofocus Prevents autofocusing of text box
 
     <ChatInput/>'s Children:
       - <AdjustableTextArea/>
@@ -99,10 +100,11 @@ class ChatInput extends React.Component {
         <div id="text-input-row">
           <div id="text-area-container">
             <AdjustableTextArea
-              ref        = {this.childTextArea}
-              text       = {this.state.text}
-              updateText = {(newText) => {this.setState({text: newText})}}
-              submitText = {this.sendText}
+              ref               = {this.childTextArea}
+              text              = {this.state.text}
+              updateText        = {(newText) => {this.setState({text: newText})}}
+              submitText        = {this.sendText}
+              preventAutofocus  = {this.props.preventAutofocus}
               />
           </div>
           {(this.state.text.length === 0 && false) && <div id="attachments-button"></div>}
