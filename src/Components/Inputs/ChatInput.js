@@ -1,13 +1,13 @@
 // =============================================================================
 // About: ChatInput.js
 // =============================================================================
-/*
+/**
   1) ChatInput contains <ChatInput/>, a component that:
     - being the text input that the user types into when using <Chat/>
     - combining a <textarea/> with emoji selection tools
 
     <ChatInput/>'s Props:
-      - n/a for now
+      @param {function} onSubmit Function to call after text is submitted
 
     <ChatInput/>'s Children:
       - <AdjustableTextArea/>
@@ -15,6 +15,7 @@
 
     <ChatInput/>'s Parents:
       - <Chat/>
+      - <Post/>
 */
 
 // Imports ---------------------------------------------------------------------
@@ -49,6 +50,7 @@ class ChatInput extends React.Component {
   sendText = (textToSend) => {
     console.log(`sending: ${textToSend}`);
     this.setState({text: "", emojiSelectActive: false});
+    this.props.onSubmit(textToSend);
   }
 
   onClick_toggleEmojiSelect = () => {
