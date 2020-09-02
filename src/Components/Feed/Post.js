@@ -40,8 +40,15 @@ class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      replyText: ''
+      messages: props.messages
     }
+  }
+
+  sendNewMessage = (text) => {
+    let newMessages = this.state.messages.slice();
+    let message = {text: text, sender: 'username', timestamp: Date.now()};
+    newMessages.push(message);
+    this.setState({messages: newMessages});
   }
 
   render() {
@@ -55,11 +62,11 @@ class Post extends React.Component {
           reactions    = {this.props.reactions}
         />
         <MessageList 
-          messages                = {this.props.messages} 
+          messages                = {this.state.messages} 
           displayProfilePictures  = {true}
         />
         <div class="reply-bar">
-          <ChatInput />
+          <ChatInput onSubmit={this.sendNewMessage} />
         </div>
       </div>
     );
