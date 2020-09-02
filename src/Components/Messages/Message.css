@@ -8,6 +8,7 @@
     text-align: left;
     margin-bottom: .1rem;
     color: var(--color-text-1);
+    word-break: break-word;
 }
 
 /* Sent Message */
