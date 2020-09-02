@@ -25,19 +25,36 @@ import './Chat.css';
 
 // components
 import ChatInput from '../Inputs/ChatInput.js';
+import MessageList from '../Messages/MessageList.js';
 
 // =============================================================================
 // <Chat/>
 // =============================================================================
 
 class Chat extends React.Component {
+  constructor() {
+    super();
+    this.messageContainer = React.createRef(); // For scrolling to bottom
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottomOfMessages()
+  }
+
+  scrollToBottomOfMessages = () => {
+    this.messageContainer.current.scrollTop = this.messageContainer.current.scrollHeight;
+  }
+
   render() {
     return (
       <div id="Chat">
-        <div id="messages-container">
+        <div id="messages-container" ref={this.messageContainer}>
+            <MessageList 
+              messages={this.props.messages}
+            />
         </div>
         <div id="chat-input-container">
-          <ChatInput/>
+          <ChatInput onSubmit={text => this.props.onSendMessage(text)}/>
         </div>
       </div>
     );
