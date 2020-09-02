@@ -24,6 +24,9 @@ import './EmojiSelect.css';
 // npm packages
 import RenderEmoji from 'react-easy-emoji';
 
+// components
+import PreventOutsideScrollingContainer from '../Wrappers/PreventOutsideScrollingContainer.js';
+
 
 // Constants -------------------------------------------------------------------
 
@@ -39,7 +42,6 @@ class EmojiSelect extends React.Component {
   constructor() {
     super();
     this.searchInputRef = React.createRef(); // <- so that the search can be auto-focused on
-    this.emojiScrollBox = React.createRef(); // so that outside scrolling can be prevented
     this.state = {
       selectSkinColorActive : false,
       hoveredEmojiId        : '',
@@ -49,49 +51,6 @@ class EmojiSelect extends React.Component {
 
   componentDidMount = () => {
     this.searchInputRef.current.focus();
-
-
-    /* Scrolling */
-    /**
-     * Initialize scrollTop so that when the container is first loaded it
-     * will detect a scroll event. If the scrollTop was set to 0 and the
-     * container was scolled up, it would not detect a scroll event but still
-     * scroll background containers.
-     */
-    this.emojiScrollBox.current.scrollTop = 1;
-    this.emojiScrollBox.current.addEventListener('scroll',
-      this.preventOutsideScrolling,
-      false
-    );
-  }
-
-  componentWillUnmount = () => {
-    this.emojiScrollBox.current.removeEventListener('scroll', 
-      this.preventOutsideScrolling, 
-      false
-    );
-  }
-
-  // Scrolling -----------------------------------------------------------------
-
-  preventOutsideScrolling = () => {
-    /**
-     * Prevents scrolling of containers outside the EmojiSelect window.
-     * Once the window is scrolled to the bottom or top set the scrollTop back
-     * to the inside of the container, preventing it ever actually reaching the
-     * top or bottom of the container.
-     */
-    let scrollTop = this.emojiScrollBox.current.scrollTop;
-    let scrollHeight = this.emojiScrollBox.current.scrollHeight;
-    let offsetHeight = this.emojiScrollBox.current.offsetHeight;
-    let contentHeight = scrollHeight - offsetHeight;
-
-    if (contentHeight <= scrollTop) {  // Box is scrolled to the bottom
-      this.emojiScrollBox.current.scrollTop = contentHeight - 1;
-    } else if (scrollTop === 0) {  // Box is scrolled to the top
-      this.emojiScrollBox.current.scrollTop = 1;
-    }
-
   }
 
   // Input ---------------------------------------------------------------------
@@ -212,9 +171,9 @@ class EmojiSelect extends React.Component {
     return (
       <div id="EmojiSelect">
         {this.renderTopBar()}
-        <div id="middle-container" ref={this.emojiScrollBox}>
+        <PreventOutsideScrollingContainer id="middle-container">
           {this.renderEmojis()}
-        </div>
+        </PreventOutsideScrollingContainer>
         <div id="bottom-container">
           {this.renderCurrentlyHoveredEmoji()}
           {this.renderSelectEmojiColor()}
