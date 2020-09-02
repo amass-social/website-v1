@@ -26,6 +26,7 @@ import './Chat.css';
 // components
 import ChatInput from '../Inputs/ChatInput.js';
 import MessageList from '../Messages/MessageList.js';
+import PreventOutsideScrollingContainer from '../Wrappers/PreventOutsideScrollingContainer';
 
 // =============================================================================
 // <Chat/>
@@ -48,11 +49,14 @@ class Chat extends React.Component {
   render() {
     return (
       <div id="Chat">
-        <div id="messages-container" ref={this.messageContainer}>
+        <PreventOutsideScrollingContainer 
+          id="messages-container" 
+          ref={this.messageContainer}
+        >
             <MessageList 
               messages={this.props.messages}
             />
-        </div>
+        </PreventOutsideScrollingContainer>
         <div id="chat-input-container">
           <ChatInput onSubmit={text => this.props.onSendMessage(text)}/>
         </div>
