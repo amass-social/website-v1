@@ -157,10 +157,21 @@ class ChatTab extends React.Component {
       dimensions[this.dimensionParams[i]] = 0;
     }
     this.state = {
-      dimensions: dimensions
+      dimensions: dimensions,
+      messages: []  // This should contain real data later, messages are stored here because <ChatPopup> loses state on rerender
     };
   }
 
+  // Messages ------------------------------------------------------------------
+
+  sendNewMessage = (text) => {
+    let newMessages = this.state.messages.slice();
+    let message = {text: text, sender: 'username', timestamp: Date.now()};
+    newMessages.push(message);
+    this.setState({messages: newMessages})
+  }
+
+  // Dimensions ----------------------------------------------------------------
 
   // gets the dimensions of this component and positioning data according to the viewport
   // following: https://www.pluralsight.com/tech-blog/getting-size-and-position-of-an-element-in-react/
@@ -233,7 +244,10 @@ class ChatTab extends React.Component {
         }}
         onClick={(e) => e.stopPropagation() /* prevents parent <ChatTab/> from being influenced by clicks to popup*/}>
         <div id="popup-content-container">
-          <ChatPopup/>
+          <ChatPopup 
+            messages      = {this.state.messages}
+            onSendMessage = {text => this.sendNewMessage(text)}
+          />
         </div>
       </div>
     );
@@ -301,7 +315,10 @@ class ChatPopup extends React.Component {
           </div>
         </div>
         <div id="messages-container">
-          <Chat/>
+          <Chat 
+            messages      = {this.props.messages}
+            onSendMessage = {text => this.props.onSendMessage(text)}
+          />
         </div>
       </div>
     )

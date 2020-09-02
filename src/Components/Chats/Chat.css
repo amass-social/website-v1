@@ -10,8 +10,14 @@
 }
 
 #Chat #messages-container {
-  flex-grow: 1;
+  flex-grow: 0;
   width: 100%;
+
+  /* Sizing */
+  padding-top: 1rem;
+  max-height: 26.5rem;
+
+  overflow-y: scroll;
 }
 
 #Chat #chat-input-container {

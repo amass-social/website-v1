@@ -67,7 +67,7 @@ class Post extends React.Component {
         />
         <div class="reply-bar">
           <ChatInput 
-            onSubmit          = {this.sendNewMessage} 
+            onSubmit          = {text => this.sendNewMessage(text)} 
             preventAutofocus  = {true}
           />
         </div>
