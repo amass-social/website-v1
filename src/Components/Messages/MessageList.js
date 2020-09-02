@@ -34,7 +34,7 @@ const LOGGED_IN_USER = 'username';
 // =============================================================================
 
 class MessageList extends React.Component {
-  createMessageGroups = (messages) => {
+  createMessageGroups = () => {
     /**
      * Parses a list of messages and creates message groups from them.
      * Messages are split into groups by the duration between them and 
@@ -54,6 +54,11 @@ class MessageList extends React.Component {
      *  ]
      * )
      */
+    
+    // Check if there are any messages first
+    let messages = this.props.messages || [];
+    if (messages.length === 0) return;
+
     let messageGroups = [];
     let currGroup = [messages[0]];
     for (let i = 1; i < messages.length; ++i) {
@@ -80,9 +85,12 @@ class MessageList extends React.Component {
   }
 
   render() {
+    // if no messages default to empty array
+    let messageGroups = this.createMessageGroups() || [];
+    
     return (
       <div class="message-list">
-        {this.createMessageGroups(this.props.messages).map(messageGroup => {
+        {messageGroups.map(messageGroup => {
           return (
             <MessageGroup 
               messages={messageGroup} 
@@ -96,7 +104,6 @@ class MessageList extends React.Component {
 }
 
 export default MessageList;
-
 
 
 // =============================================================================
