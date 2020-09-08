@@ -28,6 +28,12 @@ import DesktopLayout from './Components/DesktopLayout.js';
 import MobileLayout  from './Components/MobileLayout.js';
 
 
+// Constants -------------------------------------------------------------------
+
+const FAKE = require('./Constants/Fake/frontend-data.json');
+console.log(FAKE);
+
+
 // =============================================================================
 // <App/>
 // =============================================================================
